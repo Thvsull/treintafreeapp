@@ -1,0 +1,758 @@
+{
+  "version": 5,
+  "registros": [
+    {
+      "id": 1794083343702,
+      "fecha": "2026-11-07",
+      "concepto": "Gasolina y Parquedero",
+      "monto": 31000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1794083390742,
+      "fecha": "2026-11-07",
+      "concepto": "Zapatos Gabriel",
+      "monto": 90000,
+      "tipo": "ingreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1794083407998,
+      "fecha": "2026-11-07",
+      "concepto": "Zapatos Gabriel",
+      "monto": 60000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1794083423670,
+      "fecha": "2026-11-07",
+      "concepto": "Muestras Perfumes",
+      "monto": 110000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1794083444958,
+      "fecha": "2026-11-07",
+      "concepto": "Humidificador",
+      "monto": 10500,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1794083460966,
+      "fecha": "2026-11-07",
+      "concepto": "Humidificador + Esencia",
+      "monto": 40000,
+      "tipo": "pendiente",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1794192580327,
+      "fecha": "2026-11-07",
+      "concepto": "Helado",
+      "monto": 2000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1793971475641,
+      "fecha": "2026-11-06",
+      "concepto": "CLOUD",
+      "monto": 55000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793971485014,
+      "fecha": "2026-11-06",
+      "concepto": "GO MANGO",
+      "monto": 60000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793971522055,
+      "fecha": "2026-11-06",
+      "concepto": "CLOUD",
+      "monto": 90000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793971535906,
+      "fecha": "2026-11-06",
+      "concepto": "GO MANGO",
+      "monto": 100000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793853099367,
+      "fecha": "2026-11-05",
+      "concepto": "Rifa",
+      "monto": 255000,
+      "tipo": "ingreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1793630604901,
+      "fecha": "2026-11-02",
+      "concepto": "Pago Mom",
+      "monto": 25000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1793573597508,
+      "fecha": "2026-11-01",
+      "concepto": "Lechona",
+      "monto": 15000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1793591749325,
+      "fecha": "2026-11-01",
+      "concepto": "Cumple Alex",
+      "monto": 17000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1793414306394,
+      "fecha": "2026-10-31",
+      "concepto": "ISSEY MIYAKE",
+      "monto": 65000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793414328242,
+      "fecha": "2026-10-31",
+      "concepto": "GOOD GIRL VERY",
+      "monto": 65000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793414337322,
+      "fecha": "2026-10-31",
+      "concepto": "VERSACE EROS",
+      "monto": 0,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793037609560,
+      "fecha": "2026-10-26",
+      "concepto": "Pro 2 + Estuche",
+      "monto": 121500,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 3
+    },
+    {
+      "id": 1792889052602,
+      "fecha": "2026-10-26",
+      "concepto": "Salida Sara",
+      "monto": 31000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1793037631696,
+      "fecha": "2026-10-26",
+      "concepto": "Pro 3 + Estuche",
+      "monto": 50500,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793037398119,
+      "fecha": "2026-10-26",
+      "concepto": "Gasolina",
+      "monto": 10000,
+      "tipo": "egreso",
+      "categoria": "operativo",
+      "cantidad": 1
+    },
+    {
+      "id": 1793037705659,
+      "fecha": "2026-10-26",
+      "concepto": "Pro 2 + Estuche",
+      "monto": 240000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 3
+    },
+    {
+      "id": 1793037758915,
+      "fecha": "2026-10-26",
+      "concepto": "Pro 3 + Estuche",
+      "monto": 90000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793050308522,
+      "fecha": "2026-10-26",
+      "concepto": "Heladoss",
+      "monto": 6400,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1793075296263,
+      "fecha": "2026-10-26",
+      "concepto": "Asad",
+      "monto": 0,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1793075326858,
+      "fecha": "2026-10-26",
+      "concepto": "Perfumeros",
+      "monto": 0,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 8
+    },
+    {
+      "id": 1793133313991,
+      "fecha": "2026-10-26",
+      "concepto": "Desfase de Plata",
+      "monto": 10000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1792869030779,
+      "fecha": "2026-10-24",
+      "concepto": "Gasolina",
+      "monto": 6000,
+      "tipo": "egreso",
+      "categoria": "operativo",
+      "cantidad": 1
+    },
+    {
+      "id": 1792869056780,
+      "fecha": "2026-10-24",
+      "concepto": "Intercomunicador",
+      "monto": 115000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792869094675,
+      "fecha": "2026-10-24",
+      "concepto": "Intercomunicador",
+      "monto": 180000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792869107655,
+      "fecha": "2026-10-24",
+      "concepto": "Ahumador",
+      "monto": 20500,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792869116344,
+      "fecha": "2026-10-24",
+      "concepto": "Ahumador",
+      "monto": 35000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792765145185,
+      "fecha": "2026-10-23",
+      "concepto": "Gasolina",
+      "monto": 10000,
+      "tipo": "egreso",
+      "categoria": "operativo",
+      "cantidad": 1
+    },
+    {
+      "id": 1792765184423,
+      "fecha": "2026-10-23",
+      "concepto": "Go Mango",
+      "monto": 60000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792544402138,
+      "fecha": "2026-10-21",
+      "concepto": "Scandal Men",
+      "monto": 65000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792544417950,
+      "fecha": "2026-10-21",
+      "concepto": "Valentino Donna",
+      "monto": 65000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792508474882,
+      "fecha": "2026-10-20",
+      "concepto": "Good Girl Blush",
+      "monto": 60000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792508505282,
+      "fecha": "2026-10-20",
+      "concepto": "STRONGER WITH YOU",
+      "monto": 60000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792448352610,
+      "fecha": "2026-10-19",
+      "concepto": "Coctel salida",
+      "monto": 2000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213535702,
+      "fecha": "2026-10-17",
+      "concepto": "Good Girl Blush",
+      "monto": 70000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213547028,
+      "fecha": "2026-10-17",
+      "concepto": "Sauvage",
+      "monto": 80000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213568185,
+      "fecha": "2026-10-17",
+      "concepto": "Pro 3 + Estuche",
+      "monto": 92000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213577409,
+      "fecha": "2026-10-17",
+      "concepto": "Pro 2 + Estuche",
+      "monto": 75000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213733505,
+      "fecha": "2026-10-17",
+      "concepto": "Yum Yum",
+      "monto": 110000,
+      "tipo": "pagado",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792265596471,
+      "fecha": "2026-10-17",
+      "concepto": "Regalo Alex",
+      "monto": 40000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1792265619735,
+      "fecha": "2026-10-17",
+      "concepto": "Abono Nataly Negocio",
+      "monto": 100000,
+      "tipo": "ingreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274602818,
+      "fecha": "2026-10-17",
+      "concepto": "Sauvage",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274614268,
+      "fecha": "2026-10-17",
+      "concepto": "Valentino BIR",
+      "monto": 75000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213319552,
+      "fecha": "2026-10-16",
+      "concepto": "Pasajes",
+      "monto": 20000,
+      "tipo": "egreso",
+      "categoria": "operativo",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213355713,
+      "fecha": "2026-10-16",
+      "concepto": "Yum Yum",
+      "monto": 85000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213368550,
+      "fecha": "2026-10-16",
+      "concepto": "Good Girl Blush",
+      "monto": 40000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213380465,
+      "fecha": "2026-10-16",
+      "concepto": "Valentino BIR",
+      "monto": 40000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213435657,
+      "fecha": "2026-10-16",
+      "concepto": "Pro 2 + Estuche",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213446352,
+      "fecha": "2026-10-16",
+      "concepto": "Pro 3 + Estuche",
+      "monto": 28000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274792523,
+      "fecha": "2026-10-16",
+      "concepto": "Go Mango",
+      "monto": 60000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274813804,
+      "fecha": "2026-10-16",
+      "concepto": "Good Girl Blush",
+      "monto": 40000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274828119,
+      "fecha": "2026-10-16",
+      "concepto": "Good Girl Very",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274841936,
+      "fecha": "2026-10-16",
+      "concepto": "Valentino Donna",
+      "monto": 40000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274850987,
+      "fecha": "2026-10-16",
+      "concepto": "Scandal Dama",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274861196,
+      "fecha": "2026-10-16",
+      "concepto": "Versace Eros",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274891944,
+      "fecha": "2026-10-16",
+      "concepto": "Issey Miyake",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274905591,
+      "fecha": "2026-10-16",
+      "concepto": "Stronger With You",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792274914436,
+      "fecha": "2026-10-16",
+      "concepto": "Scandal Men",
+      "monto": 35000,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792281148377,
+      "fecha": "2026-10-16",
+      "concepto": "Helado",
+      "monto": 10000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1792281169315,
+      "fecha": "2026-10-16",
+      "concepto": "Bolsas Embalaje",
+      "monto": 13500,
+      "tipo": "egreso",
+      "categoria": "operativo",
+      "cantidad": 1
+    },
+    {
+      "id": 1792157292252,
+      "fecha": "2026-10-03",
+      "concepto": "Venta Intercomunicador ",
+      "monto": 100000,
+      "tipo": "ingreso"
+    },
+    {
+      "id": 1792157303560,
+      "fecha": "2026-10-03",
+      "concepto": "Perfumes Matias",
+      "monto": 160000,
+      "tipo": "ingreso"
+    },
+    {
+      "id": 1792157325095,
+      "fecha": "2026-10-03",
+      "concepto": "Debe Hader Perfume",
+      "monto": 75000,
+      "tipo": "pendiente"
+    },
+    {
+      "id": 1792157374139,
+      "fecha": "2026-10-03",
+      "concepto": "Salida Sarita",
+      "monto": 30000,
+      "tipo": "egreso"
+    },
+    {
+      "id": 1792157413203,
+      "fecha": "2026-10-03",
+      "concepto": "Ahumador",
+      "monto": 27000,
+      "tipo": "ingreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792157389328,
+      "fecha": "2026-10-03",
+      "concepto": "Empanadas y Parqueadero",
+      "monto": 14000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213282924,
+      "fecha": "2026-10-03",
+      "concepto": "Ahumador",
+      "monto": 10500,
+      "tipo": "egreso",
+      "categoria": "mercancia",
+      "cantidad": 1
+    },
+    {
+      "id": 1792213296698,
+      "fecha": "2026-10-03",
+      "concepto": "Cable Original",
+      "monto": 27000,
+      "tipo": "egreso",
+      "categoria": "general",
+      "cantidad": 1
+    },
+    {
+      "id": 1792156836672,
+      "fecha": "2026-09-12",
+      "concepto": "Saldo Inicial",
+      "monto": 958000,
+      "tipo": "ingreso"
+    },
+    {
+      "id": 1792156873435,
+      "fecha": "2026-09-12",
+      "concepto": "Salida Sarita",
+      "monto": 30000,
+      "tipo": "egreso"
+    },
+    {
+      "id": 1792156892372,
+      "fecha": "2026-09-12",
+      "concepto": "Cargador iPhone",
+      "monto": 50000,
+      "tipo": "egreso"
+    },
+    {
+      "id": 1792156914768,
+      "fecha": "2026-09-12",
+      "concepto": "Paga Saldo Ana Maria",
+      "monto": 15000,
+      "tipo": "ingreso"
+    },
+    {
+      "id": 1792156942835,
+      "fecha": "2026-09-12",
+      "concepto": "Debe Ana Maria",
+      "monto": 105000,
+      "tipo": "pagado"
+    },
+    {
+      "id": 1792156978892,
+      "fecha": "2026-09-12",
+      "concepto": "Matias Paga Perfumes",
+      "monto": 180000,
+      "tipo": "ingreso"
+    },
+    {
+      "id": 1792157126964,
+      "fecha": "2026-09-12",
+      "concepto": "Compra Perfumes",
+      "monto": 130000,
+      "tipo": "egreso"
+    },
+    {
+      "id": 1792157163819,
+      "fecha": "2026-09-12",
+      "concepto": "Añado Saldo Inicial",
+      "monto": 800,
+      "tipo": "ingreso"
+    },
+    {
+      "id": 1792157249568,
+      "fecha": "2026-09-12",
+      "concepto": "Compras Varias y Mercancia",
+      "monto": 272800,
+      "tipo": "egreso"
+    }
+  ],
+  "cotizaciones": [
+    {
+      "id": 1794195522639,
+      "num": 1,
+      "est": "pendiente",
+      "cli": "Nath",
+      "tel": "3052392565",
+      "fec": "2026-11-08",
+      "items": [
+        {
+          "n": "PRO 3 + ESTUCHE",
+          "can": 1,
+          "pre": 100000
+        }
+      ],
+      "des": 0,
+      "nota": "Envio Incluido"
+    }
+  ],
+  "categorias": {},
+  "productos": {
+    "ASAD": {
+      "precio": 85000
+    },
+    "PRO 2 + ESTUCHE": {
+      "precio": 90000
+    },
+    "PRO 3 + ESTUCHE": {
+      "precio": 100000
+    }
+  },
+  "meta": 0
+}
