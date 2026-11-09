@@ -11,7 +11,7 @@
 </head>
 <body>
 
-  <!-- PANTALLA DE AUTENTICACIÓN / LOGIN -->
+  <!-- PANTALLA DE LOGIN -->
   <div id="loginScreen" class="auth-screen">
     <div class="auth-card">
       <div class="brand-logo-area">
@@ -51,9 +51,15 @@
       </header>
 
       <div class="box bar">
-        <div class="logo-uploader">
-          <label><b>Logo del negocio:</b></label>
-          <input type="file" id="logoInput" accept="image/*" style="width:auto" onchange="subirLogo(event)">
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap">
+          <div>
+            <b>Logo:</b>
+            <input type="file" id="logoInput" accept="image/*" style="width:auto" onchange="subirLogo(event)">
+          </div>
+          <div>
+            <b>Cargar JSON a Nube:</b>
+            <input type="file" id="jsonInput" accept=".json,application/json" style="width:auto" onchange="cargarJSONaFirebase(event)">
+          </div>
         </div>
         <div class="period-selector">
           <label><b>Periodo:</b></label>
@@ -76,7 +82,7 @@
         <button data-t="cotizar"><i>💬</i>Cotizar</button>
       </nav>
 
-      <!-- SECCIÓN RESUMEN -->
+      <!-- RESUMEN -->
       <div id="resumen" class="tab on">
         <div id="kCaja"></div>
         <div class="kpis" id="kPer"></div>
@@ -104,7 +110,7 @@
         <div id="alertas"></div>
       </div>
 
-      <!-- SECCIÓN MOVIMIENTOS -->
+      <!-- MOVIMIENTOS -->
       <div id="finanzas" class="tab">
         <div class="box">
           <div class="form" id="formularioArea">
@@ -145,7 +151,7 @@
         </div>
       </div>
 
-      <!-- SECCIÓN GANANCIAS -->
+      <!-- GANANCIAS -->
       <div id="ganancias" class="tab">
         <div class="grid2">
           <div class="box"><h3>🧮 Estado de resultados</h3><div id="pl"></div></div>
@@ -163,7 +169,7 @@
         <div class="box"><h3>Costos y ganancia por producto</h3><div class="sc"><table><thead><tr><th>Producto</th><th class="n">Comprado</th><th class="n">Costo/und</th><th class="n">Vendido</th><th class="n">Ventas</th><th class="n">Costo ventas</th><th class="n">Utilidad</th><th class="n">Margen</th></tr></thead><tbody id="tProd"></tbody></table></div></div>
       </div>
 
-      <!-- SECCIÓN GASTOS -->
+      <!-- GASTOS -->
       <div id="gastos" class="tab">
         <div class="kpis" id="kGas"></div>
         <div class="box">
@@ -191,7 +197,7 @@
         </div>
       </div>
 
-      <!-- SECCIÓN INVENTARIO -->
+      <!-- INVENTARIO -->
       <div id="inventario" class="tab">
         <div class="box">
           <h3>📦 Catálogo y stock</h3>
@@ -206,7 +212,7 @@
         </div>
       </div>
 
-      <!-- SECCIÓN COTIZAR & FACTURACIÓN -->
+      <!-- COTIZAR & FACTURAS -->
       <div id="cotizar" class="tab">
         <div class="grid2">
           <div class="box">
@@ -242,7 +248,7 @@
 
   <div id="toast"></div>
 
-  <!-- SDKs de Firebase Firestore y Auth (Conexión Nube) -->
+  <!-- FIREBASE SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
