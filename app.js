@@ -1,12 +1,13 @@
 // CONFIGURACIÓN DE FIREBASE (Reemplaza con tus llaves del proyecto de Firebase)
-const firebaseConfig = {
-  apiKey: "TU_API_KEY_AQUI",
-  authDomain: "tu-proyecto.firebaseapp.com",
-  projectId: "tu-proyecto",
-  storageBucket: "tu-proyecto.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "1:000000000000:web:000000000000"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyAqAvlycyMLla5pQIQ19Uc6mAuWBRG2m4s",
+    authDomain: "palmascent-app.firebaseapp.com",
+    projectId: "palmascent-app",
+    storageBucket: "palmascent-app.firebasestorage.app",
+    messagingSenderId: "306353035479",
+    appId: "1:306353035479:web:17cd5ebea63c010994f892",
+    measurementId: "G-32B037SRPR"
+  };
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
