@@ -198,9 +198,10 @@ function borrarRegistro(id){if(confirm('¿Estás seguro de eliminar este registr
 
 /* ---------- pestañas ---------- */
 function verTab(id){
-  window.scrollTo(0,0);$('tabs').classList.remove('open');
+  window.scrollTo(0,0);$('sheet').classList.remove('on');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.id===id));
   document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));
+  const mb=document.querySelector('.mbtn');if(mb)mb.classList.toggle('on',['finanzas','ganancias','gastos','ajustes'].includes(id));
 }
 $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.t)verTab(b.dataset.t);});
 
@@ -439,23 +440,45 @@ function suscribir(){
 }
 async function entrar(u){USER=u;$('login').classList.remove('on');$('uMail').textContent=u.email;$('cuenta').textContent='Sesión iniciada: '+u.email;await nubeSync();suscribir();}
 async function auth(m){
-  if(!SB){$('lgM').textContent='La nube no está configurada (ver config.js).';return;}
-  const email=$('lgE').value.trim(),password=$('lgP').value;$('lgM').textContent='…';
-  const{data,error}=m==='up'?await SB.auth.signUp({email,password}):await SB.auth.signInWithPassword({email,password});
-  if(error){$('lgM').textContent=error.message;return;}
-  if(data.session)entrar(data.user);else $('lgM').textContent='Revisa tu correo para confirmar la cuenta y luego entra.';
+  const msg=t=>{$('lgM').textContent=t;};
+  if(!CFG.SUPABASE_URL||!CFG.SUPABASE_ANON_KEY){diag();return;}
+  if(!SB){msg('Conectando con la nube…');if(!(await crearSB())){msg('No pude cargar Supabase. Revisa tu internet y vuelve a intentar.');return;}}
+  const email=$('lgE').value.trim(),password=$('lgP').value;
+  if(!email||password.length<6){msg('Escribe tu correo y una contraseña de mínimo 6 caracteres.');return;}
+  msg('…');
+  try{
+    const{data,error}=m==='up'?await SB.auth.signUp({email,password}):await SB.auth.signInWithPassword({email,password});
+    if(error){msg(error.message);return;}
+    if(data.session)entrar(data.user);else msg('Cuenta creada. Revisa tu correo para confirmarla y luego pulsa Entrar (o desactiva "Confirm email" en Supabase).');
+  }catch(e){msg('Error de conexión: '+(e&&e.message||e));}
 }
-function usarLocal(){localStorage.setItem(KEY+'_solo','1');$('login').classList.remove('on');}
+function masMenu(f){const s=$('sheet');s.classList.toggle('on',f===undefined?!s.classList.contains('on'):f);}
+function estadoClick(){if(USER)verTab('ajustes');else{$('login').classList.add('on');diag();}}
+const cargarSB=()=>new Promise(ok=>{
+  if(window.supabase)return ok(true);
+  const vs=['2.58.0','2.45.4'];let i=0;
+  const next=()=>{if(i>=vs.length)return ok(false);const e=document.createElement('script');e.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@'+vs[i++]+'/dist/umd/supabase.js';e.onload=()=>ok(!!window.supabase);e.onerror=next;document.head.appendChild(e);};
+  next();
+});
+async function crearSB(){
+  if(SB)return true;if(!(await cargarSB()))return false;
+  try{SB=window.supabase.createClient(String(CFG.SUPABASE_URL).trim().replace(/\/rest\/v1\/?$/,'').replace(/\/$/,''),String(CFG.SUPABASE_ANON_KEY).trim());return true;}catch(e){return false;}
+}
+function diag(){
+  const u=!!(CFG.SUPABASE_URL&&String(CFG.SUPABASE_URL).trim()),k=!!(CFG.SUPABASE_ANON_KEY&&String(CFG.SUPABASE_ANON_KEY).trim());
+  $('lgM').textContent=(u&&k)?(SB?'Nube lista ✓':'Conectando con la nube…'):'⚠️ config.js está vacío: falta '+(!u?'la URL ':'')+(!k?'la llave ':'')+'(Project URL y Publishable key de Supabase).';
+}
+function usarLocal(){localStorage.setItem(KEY+'_solo','1');$('login').classList.remove('on');estado('● Solo en este dispositivo');}
 async function salir(){if(SB)await SB.auth.signOut();USER=null;localStorage.removeItem(KEY+'_solo');$('login').classList.add('on');estado('● Sin sesión');}
 async function iniciar(){
   cargarDeLocal();TS=Number(localStorage.getItem(KEY+'_ts'))||0;fillCli();pintarEmp();
   if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-  if(!CFG.SUPABASE_URL||!window.supabase){estado('● Solo en este dispositivo');$('cuenta').textContent='Nube no configurada: completa config.js con los datos de Supabase.';return;}
-  SB=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY);
+  if(!CFG.SUPABASE_URL||!CFG.SUPABASE_ANON_KEY){estado('● Solo en este dispositivo');$('cuenta').textContent='La nube no está configurada: completa config.js con los datos de Supabase. Mientras tanto todo funciona en este dispositivo.';return;}
+  if(!(await crearSB())){estado('📴 Nube no disponible (modo local)');return;}
   window.addEventListener('online',()=>{if(USER)nubeSync();});
   let s=null;try{s=(await SB.auth.getSession()).data.session;}catch(e){}
-  if(s)await entrar(s.user);else if(localStorage.getItem(KEY+'_solo')!=='1')$('login').classList.add('on');
-  else estado('● Sin sesión');
+  if(s)await entrar(s.user);else if(localStorage.getItem(KEY+'_solo')!=='1'){$('login').classList.add('on');diag();}
+  else estado('● Solo en este dispositivo');
   SB.auth.onAuthStateChange(ev=>{if(ev==='SIGNED_OUT')USER=null;});
 }
-window.onload=iniciar;
+iniciar();

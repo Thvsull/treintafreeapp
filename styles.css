@@ -88,3 +88,9 @@ body.intro .svg polyline{stroke-dasharray:1;animation:dash 1.1s var(--ease) .15s
  .tabs.open .secw button{display:flex;align-items:center;gap:8px;font-size:.95em;padding:12px;color:var(--tx)}
  .tabs.open .secw button i{display:inline;font-size:1.2em;margin:0}
 }
+
+.sheet{display:none;position:fixed;inset:0;z-index:15;background:rgba(5,15,11,.45);align-items:flex-end;justify-content:center;padding:14px 14px calc(96px + env(safe-area-inset-bottom))}.sheet.on{display:flex}
+.sheetp{width:100%;max-width:420px;display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:10px}
+.sheetp button{display:flex;align-items:center;gap:10px;border:0;background:var(--in);color:var(--tx);font-weight:600;padding:16px 14px;border-radius:14px;cursor:pointer;touch-action:manipulation}.sheetp button i{font-style:normal;font-size:1.3em}
+.tabs .mbtn.on{background:var(--gd);color:#fff}
+@media(min-width:761px){.sheet{display:none!important}}
