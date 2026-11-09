@@ -1,586 +1,251 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0e3b2f">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;600&display=swap">
-<title>Palmascent · Control del Negocio</title>
-<style>
-:root{--bg:#e8eeeb;--card:#fbfdfc;--tx:#14231e;--mu:#62756d;--bd:#d5dfda;--g:#1f7a5c;--gd:#0e3b2f;--r:#c4553f;--o:#d08a1f;--a:#c8922e;--bl:#2f6f8f;--in:#f1f6f4;--ease:cubic-bezier(.2,.7,.2,1);--disp:'Fraunces','Iowan Old Style','Palatino Linotype',Georgia,serif}
-@media(prefers-color-scheme:dark){:root{--bg:#0b1613;--card:#13221d;--tx:#e4efe9;--mu:#8ea59b;--bd:#233630;--g:#3fb68b;--gd:#0a2a21;--in:#1a2d27;--r:#e0806b;--a:#e0aa4a;--o:#e0a23a;--bl:#6aa9c9}}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{overscroll-behavior:none}
-body{font-family:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.45;background:var(--bg);color:var(--tx);margin:0;min-height:100dvh;padding:max(14px,env(safe-area-inset-top)) 14px 40px}
-.wrap{max-width:1120px;margin:auto}
-.mast{display:flex;justify-content:space-between;align-items:flex-end;padding:8px 4px 16px}
-h1{font-family:var(--disp);font-weight:600;font-size:2.1em;letter-spacing:-.02em;line-height:1;margin:0}
-.mast p{margin:5px 0 0;color:var(--mu);font-size:.9em}
-.ok{color:var(--g);font-size:.82em;font-weight:600}
-h3{font-family:var(--disp);font-weight:600;font-size:1.12em;margin:0 0 12px}
-.box{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;margin-bottom:14px}
-.bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;font-size:.9em}.bar h3{margin:0}
-.tabs{display:flex;gap:4px;padding:4px;background:var(--card);border:1px solid var(--bd);border-radius:999px;margin-bottom:16px;position:sticky;top:8px;z-index:5;overflow-x:auto;scrollbar-width:none}
-.tabs button{flex:1;white-space:nowrap;border:0;padding:9px 14px;font-weight:600;cursor:pointer;border-radius:999px;background:transparent;color:var(--mu);font-size:.92em;transition:background-color .15s,color .15s;touch-action:manipulation}
-.tabs button i{font-style:normal;margin-right:6px}
-.tabs button.on{background:var(--gd);color:#fff}
-@media(hover:hover) and (pointer:fine){.tabs button:not(.on):hover{background:var(--in);color:var(--tx)}}
-.tab{display:none}.tab.on{display:block}
-.hero{position:relative;overflow:hidden;background:var(--gd);color:#eaf6f0;border-radius:22px;padding:26px 26px 20px;margin-bottom:14px}
-.hero small{opacity:.7}
-.hero .big{display:block;font-family:var(--disp);font-weight:500;font-size:clamp(2.4em,8vw,3.8em);letter-spacing:-.03em;line-height:1.05;margin:4px 0 20px;font-variant-numeric:lining-nums tabular-nums;position:relative}
-.hero dl{display:flex;flex-wrap:wrap;margin:0;border-top:1px solid rgba(255,255,255,.18);position:relative}
-.hero dl>div{flex:1;min-width:130px;padding:12px 18px 0 0}
-.hero dt{opacity:.65;font-size:.82em}.hero dd{margin:2px 0 0;font-size:1.15em;font-weight:600;font-variant-numeric:tabular-nums}
-.frond{position:absolute;right:-12px;top:-16px;width:240px;height:240px;color:var(--a);opacity:.3;pointer-events:none}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:16px;overflow:hidden;margin-bottom:14px}
-.k{border-radius:12px;padding:14px 16px;color:#fff}
-.k small{display:block;opacity:.8;font-size:.85em;margin-bottom:3px}
-.k b{font-family:var(--disp);font-weight:600;font-size:1.45em;font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.01em}
-.kpis .k{background:var(--card);color:var(--tx);border-radius:0}.kpis .k small{color:var(--mu);opacity:1}
-input,select,button{font:inherit}
-input,select{padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--in);color:var(--tx);width:100%;min-height:42px;transition:border-color .15s,box-shadow .15s}
-input:focus,select:focus{outline:0;border-color:var(--g);box-shadow:0 0 0 3px color-mix(in srgb,var(--g) 22%,transparent)}
-.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.btn{border:0;border-radius:10px;padding:10px 14px;color:#fff;font-weight:600;cursor:pointer;background:var(--g);touch-action:manipulation;transition:transform .12s var(--ease),filter .15s}
-.btn:active{transform:scale(.97)}
-.btn.p{background:var(--gd);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}.btn.o{background:var(--o)}.btn.r{background:var(--r)}.btn.b{background:var(--bl)}.btn.s{padding:6px 9px;font-size:.8em;border-radius:8px;min-height:32px}
-@media(hover:hover) and (pointer:fine){.btn:hover{filter:brightness(1.1)}}
-.full{grid-column:1/-1}
-.sc{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:.9em;font-variant-numeric:tabular-nums}
-th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap}
-th{color:var(--mu);font-weight:500;font-size:.85em}
-tbody tr:last-child td{border-bottom:0}
-@media(hover:hover){tbody tr:hover td{background:var(--in)}}
-td.n,th.n{text-align:right}
-.pos{color:var(--g);font-weight:600}.neg{color:var(--r);font-weight:600}.pen{color:var(--o);font-weight:600}.pag{color:var(--bl);font-weight:600}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:14px}
-.svg{width:100%;height:auto}.grid{stroke:var(--bd);stroke-width:1}.tx{fill:var(--mu);font-size:11px}
-.leg{display:flex;gap:14px;font-size:.85em;color:var(--mu);margin-top:6px}.leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px}
-.hb{display:grid;grid-template-columns:110px 1fr 90px;gap:10px;align-items:center;margin:8px 0;font-size:.9em}
-.hb div.t{background:var(--bd);border-radius:6px;height:12px;overflow:hidden}.hb div.t span{display:block;height:100%;border-radius:6px;background:var(--r)}
-.al{background:color-mix(in srgb,var(--o) 14%,var(--card));border-left:4px solid var(--o);padding:10px 14px;border-radius:10px;margin-bottom:8px;font-size:.9em}
-.mu{color:var(--mu);font-size:.85em}
-.pl td{padding:8px}.pl tr.t td{font-weight:700;border-top:2px solid var(--bd)}
-.chip{display:inline-block;background:var(--in);border:1px solid var(--bd);border-radius:999px;padding:4px 12px;margin:3px;font-size:.85em}.chip a{cursor:pointer;color:var(--r);margin-left:4px}
-.modal{display:none;position:fixed;inset:0;background:rgba(5,15,11,.55);z-index:9;align-items:center;justify-content:center}.modal.on{display:flex}
-#toast{position:fixed;bottom:calc(96px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:var(--gd);color:#fff;padding:11px 18px;border-radius:12px;display:none;z-index:10;max-width:90%;text-align:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}#toast.on{display:block}
-@keyframes grow{from{transform:scaleY(0)}}@keyframes dash{from{stroke-dashoffset:1}}
-.svg rect{transform-box:fill-box;transform-origin:bottom}
-body.intro .svg rect{animation:grow .7s var(--ease) both}
-body.intro .svg polyline{stroke-dasharray:1;animation:dash 1.1s var(--ease) .15s both}
-@media(prefers-reduced-motion:reduce){body.intro .svg rect,body.intro .svg polyline{animation:none}}
-@media(max-width:760px){
- input,select{font-size:16px}
- body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
- .tabs{position:fixed;top:auto;bottom:max(10px,env(safe-area-inset-bottom));left:10px;right:10px;margin:0;border-radius:22px;padding:6px;gap:2px;overflow:visible;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
- .tabs button{padding:6px 2px;font-size:.66em;line-height:1.2;border-radius:16px;min-width:0}
- .tabs button i{display:block;margin:0 0 2px;font-size:1.8em}
- .hero{padding:20px}.hb{grid-template-columns:90px 1fr 80px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0e3b2f">
+  <title>Palmascent · Control del Negocio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
-<header class="mast"><div><h1>Palmascent</h1><p>Ventas, costos e inventario del negocio</p></div><span class="ok">● Guardado automático</span></header>
 
-<div class="box bar">
-  <div><b>Restaurar copia (.json):</b> <input type="file" id="fileInput" accept=".json,application/json" style="width:auto" onchange="cargarJSON()"> <span class="mu">Se importa solo al elegirlo (o arrastra el archivo a la página)</span></div>
-  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <label><b>Periodo:</b></label>
-    <select id="per" style="width:auto" onchange="render()">
-      <option value="todo">Todo el historial</option><option value="mes">Este mes</option><option value="mesant">Mes anterior</option><option value="30d">Últimos 30 días</option><option value="anio">Este año</option>
-    </select>
-    <button class="btn p" onclick="exportarJSON()">💾 Copia de seguridad</button>
-  </div>
-</div>
-
-<div class="tabs" id="tabs">
-  <button class="on" data-t="resumen"><i>📊</i>Resumen</button>
-  <button data-t="finanzas"><i>💰</i>Movimientos</button>
-  <button data-t="ganancias"><i>📈</i>Ganancias</button>
-  <button data-t="gastos"><i>🧾</i>Gastos</button>
-  <button data-t="inventario"><i>📦</i>Inventario</button>
-  <button data-t="cotizar"><i>💬</i>Cotizar</button>
-</div>
-
-<!-- RESUMEN -->
-<div id="resumen" class="tab on">
-  <div id="kCaja"></div>
-  <div class="kpis" id="kPer"></div>
-  <div class="box" id="meta"></div>
-  <div class="box">
-    <div class="bar"><h3>📊 ¿Cómo le va al negocio?</h3>
-      <select id="gran" style="width:auto" onchange="render()"><option value="dia">Por día</option><option value="sem">Por semana</option><option value="mes" selected>Por mes</option></select></div>
-    <div id="chBar"></div>
-    <div class="leg"><span><i style="background:var(--g)"></i>Ventas</span><span><i style="background:var(--a)"></i>Utilidad neta</span></div>
-  </div>
-  <div class="grid2">
-    <div class="box"><h3>💵 Efectivo en caja (evolución)</h3><div id="chLine"></div></div>
-    <div class="box"><h3>🏆 Top productos por utilidad</h3><div id="top"></div></div>
-  </div>
-  <div class="box"><h3>☐ Cuentas por cobrar</h3><div class="sc" id="cobrar"></div></div>
-  <div id="alertas"></div>
-</div>
-
-<!-- MOVIMIENTOS -->
-<div id="finanzas" class="tab">
-  <div class="box">
-    <div class="form" id="formularioArea">
-      <input type="date" id="fecha">
-      <input type="text" id="concepto" list="prods" placeholder="Producto o gasto">
-      <datalist id="prods"></datalist>
-      <input type="number" id="monto" placeholder="Monto total ($)">
-      <select id="tipo">
-        <option value="ingreso">+ Ingreso (venta cash)</option>
-        <option value="egreso">- Egreso (gasto/compra)</option>
-        <option value="pendiente">☐ Por cobrar (me deben)</option>
-      </select>
-      <select id="categoria"></select>
-      <input type="number" id="cantidad" placeholder="Cantidad" value="1" min="1">
-      <button id="btnAccion" class="btn full" onclick="procesarRegistro()">Agregar registro</button>
-      <button id="btnCancelar" class="btn full" style="background:#7f8c8d;display:none" onclick="cancelarEdicion()">Cancelar edición</button>
-    </div>
-    <p class="mu">💡 Compra de mercancía = <b>Egreso + Mercancía</b> · Venta de producto = <b>Ingreso/Por cobrar + Mercancía</b> (usa el mismo nombre del producto para que se calcule el costo).</p>
-  </div>
-  <div class="box">
-    <div class="form" style="margin-bottom:10px">
-      <input type="search" id="q" placeholder="🔎 Buscar..." oninput="render()">
-      <select id="ft" onchange="render()"><option value="">Todos los tipos</option><option value="ingreso">Ingreso</option><option value="egreso">Egreso</option><option value="pendiente">Por cobrar</option><option value="pagado">Pagado</option></select>
-    </div>
-    <div class="sc"><table><thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th>Tipo</th><th class="n">Cant.</th><th class="n">Monto</th><th>Acciones</th></tr></thead><tbody id="tablaRegistros"></tbody></table></div>
-  </div>
-</div>
-
-<!-- GANANCIAS -->
-<div id="ganancias" class="tab">
-  <div class="grid2">
-    <div class="box"><h3>🧮 Estado de resultados</h3><div id="pl"></div>
-      <p class="mu">El costo de ventas usa el costo promedio de compra de cada producto. Los retiros personales y gastos generales no se restan de la utilidad del negocio.</p></div>
-    <div class="box"><h3>🏷️ Calculadora de precio</h3>
-      <div class="form">
-        <select id="cpProd" onchange="cpSel()"><option value="">Elegir producto…</option></select>
-        <input type="number" id="cpCosto" placeholder="Costo por unidad ($)" oninput="cpCalc()">
-        <input type="number" id="cpMg" placeholder="Margen deseado (%)" value="40" oninput="cpCalc()">
+  <!-- PANTALLA DE AUTENTICACIÓN / LOGIN -->
+  <div id="loginScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="brand-logo-area">
+        <img id="loginLogoPreview" src="logo.png" alt="Palmascent Logo" class="brand-logo" onerror="this.style.display='none'">
+        <h1>Palmascent</h1>
+        <p>Sistema de Gestión & Contabilidad</p>
       </div>
-      <div id="cpRes" style="margin-top:12px"></div></div>
-  </div>
-  <div class="box"><h3>Ganancia por categoría de producto</h3><div class="sc"><table><thead><tr><th>Categoría</th><th class="n">Ventas</th><th class="n">Utilidad</th><th class="n">Margen</th></tr></thead><tbody id="tCatP"></tbody></table></div></div>
-  <div class="box"><h3>Costos y ganancia por producto</h3>
-    <div class="sc"><table><thead><tr><th>Producto</th><th class="n">Comprado</th><th class="n">Costo/und</th><th class="n">Vendido</th><th class="n">Ventas</th><th class="n">Costo ventas</th><th class="n">Utilidad</th><th class="n">Margen</th></tr></thead><tbody id="tProd"></tbody></table></div></div>
-</div>
-
-<!-- GASTOS -->
-<div id="gastos" class="tab">
-  <div class="kpis" id="kGas"></div>
-  <div class="box"><h3>🏷️ Mis categorías de gasto</h3>
-    <div class="form"><input id="ncNom" placeholder="Nombre (Transporte, Publicidad…)"><select id="ncBeh"><option value="operativo">Gasto del negocio (resta utilidad)</option><option value="otro">Personal / no resta utilidad</option></select><button class="btn" onclick="addCat()">+ Agregar</button></div>
-    <div id="catList" style="margin-top:10px"></div></div>
-  <div class="grid2">
-    <div class="box"><h3>Gastos por categoría</h3><div id="gCat"></div></div>
-    <div class="box"><h3>Mayores gastos</h3><div id="gTop"></div></div>
-  </div>
-  <div class="box">
-    <div class="form" style="margin-bottom:10px">
-      <select id="gf" onchange="render()"></select>
-      <input type="search" id="gq" placeholder="🔎 Buscar gasto..." oninput="render()">
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="field">
+          <label for="loginEmail">Correo / Usuario</label>
+          <input type="email" id="loginEmail" placeholder="usuario@palmascent.com" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary full">Iniciar Sesión</button>
+      </form>
     </div>
-    <div class="sc"><table><thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th class="n">Cant.</th><th class="n">Monto</th></tr></thead><tbody id="tGas"></tbody></table></div>
   </div>
-</div>
 
-<!-- INVENTARIO -->
-<div id="inventario" class="tab">
-  <div class="box"><h3>📦 Catálogo y stock</h3>
-    <div class="form" style="margin-bottom:10px"><input id="apN" placeholder="Producto nuevo"><input id="apC" list="pcats" placeholder="Categoría (Perfumes, Audio…)"><input type="number" id="apP" placeholder="Precio de venta ($)"><button class="btn" onclick="addProd()">+ Al catálogo</button></div>
-    <datalist id="pcats"></datalist>
-    <p class="mu">Escribe la categoría y el precio de venta de cada producto directo en la tabla. Ese precio se usa en Cotizar (en gris ves el último precio al que vendiste).</p>
-    <div class="sc"><table><thead><tr><th>Producto</th><th>Categoría</th><th class="n">Entradas</th><th class="n">Salidas</th><th class="n">Stock</th><th class="n">Valor (costo)</th><th>Precio venta</th><th></th></tr></thead><tbody id="tablaInventario"></tbody></table></div></div>
-</div>
+  <!-- APLICACIÓN PRINCIPAL -->
+  <div id="appScreen" class="app-screen" style="display: none;">
+    <div class="wrap">
+      <header class="mast">
+        <div class="brand-header">
+          <img id="appLogo" src="logo.png" alt="Logo" class="app-logo" onerror="this.style.display='none'">
+          <div>
+            <h1>Palmascent</h1>
+            <p>Ventas, costos e inventario</p>
+          </div>
+        </div>
+        <div class="user-status">
+          <span class="ok">● Sincronizado en la nube</span>
+          <button class="btn btn-sm btn-outline" onclick="handleLogout()">Cerrar sesión</button>
+        </div>
+      </header>
 
-<!-- COTIZAR -->
-<div id="cotizar" class="tab">
-  <div class="grid2">
-    <div class="box"><h3>💬 Nueva cotización</h3>
-      <div class="form">
-        <input id="qCli" placeholder="Cliente"><input id="qTel" placeholder="Teléfono (opcional)"><input type="date" id="qFec">
-        <input id="qProd" list="prods" placeholder="Producto" onchange="qSug()"><input type="number" id="qCan" value="1" min="1"><input type="number" id="qPre" placeholder="Precio unidad ($)">
-        <button class="btn b full" onclick="qAdd()">+ Agregar a la cotización</button>
+      <div class="box bar">
+        <div class="logo-uploader">
+          <label><b>Logo del negocio:</b></label>
+          <input type="file" id="logoInput" accept="image/*" style="width:auto" onchange="subirLogo(event)">
+        </div>
+        <div class="period-selector">
+          <label><b>Periodo:</b></label>
+          <select id="per" style="width:auto" onchange="render()">
+            <option value="todo">Todo el historial</option>
+            <option value="mes">Este mes</option>
+            <option value="mesant">Mes anterior</option>
+            <option value="30d">Últimos 30 días</option>
+            <option value="anio">Este año</option>
+          </select>
+        </div>
       </div>
-      <div class="sc" id="qItems" style="margin-top:10px"></div>
-      <div class="form" style="margin-top:10px"><input type="number" id="qDes" placeholder="Descuento (%)" value="0" oninput="qRender()"><input id="qNota" placeholder="Nota (válida 3 días, envío incluido…)"></div>
-      <div id="qTot"></div>
-      <div class="form" style="margin-top:10px"><button class="btn" onclick="qSave()">💾 Guardar</button><button class="btn b" onclick="qCopy()">📋 WhatsApp</button><button class="btn p" onclick="qPrint()">🖨️ Imprimir/PDF</button><button class="btn r" onclick="qNew()">Nueva</button></div>
+
+      <nav class="tabs" id="tabs">
+        <button class="on" data-t="resumen"><i>📊</i>Resumen</button>
+        <button data-t="finanzas"><i>💰</i>Movimientos</button>
+        <button data-t="ganancias"><i>📈</i>Ganancias</button>
+        <button data-t="gastos"><i>🧾</i>Gastos</button>
+        <button data-t="inventario"><i>📦</i>Inventario</button>
+        <button data-t="cotizar"><i>💬</i>Cotizar</button>
+      </nav>
+
+      <!-- SECCIÓN RESUMEN -->
+      <div id="resumen" class="tab on">
+        <div id="kCaja"></div>
+        <div class="kpis" id="kPer"></div>
+        <div class="box" id="meta"></div>
+        <div class="box">
+          <div class="bar">
+            <h3>📊 ¿Cómo le va al negocio?</h3>
+            <select id="gran" style="width:auto" onchange="render()">
+              <option value="dia">Por día</option>
+              <option value="sem">Por semana</option>
+              <option value="mes" selected>Por mes</option>
+            </select>
+          </div>
+          <div id="chBar"></div>
+          <div class="leg">
+            <span><i style="background:var(--g)"></i>Ventas</span>
+            <span><i style="background:var(--a)"></i>Utilidad neta</span>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="box"><h3>💵 Efectivo en caja (evolución)</h3><div id="chLine"></div></div>
+          <div class="box"><h3>🏆 Top productos por utilidad</h3><div id="top"></div></div>
+        </div>
+        <div class="box"><h3>☐ Cuentas por cobrar</h3><div class="sc" id="cobrar"></div></div>
+        <div id="alertas"></div>
+      </div>
+
+      <!-- SECCIÓN MOVIMIENTOS -->
+      <div id="finanzas" class="tab">
+        <div class="box">
+          <div class="form" id="formularioArea">
+            <input type="date" id="fecha">
+            <input type="text" id="concepto" list="prods" placeholder="Producto o gasto">
+            <datalist id="prods"></datalist>
+            <input type="number" id="monto" placeholder="Monto total ($)">
+            <select id="tipo">
+              <option value="ingreso">+ Ingreso (venta cash)</option>
+              <option value="egreso">- Egreso (gasto/compra)</option>
+              <option value="pendiente">☐ Por cobrar (me deben)</option>
+            </select>
+            <select id="categoria"></select>
+            <input type="number" id="cantidad" placeholder="Cantidad" value="1" min="1">
+            <button id="btnAccion" class="btn btn-primary full" onclick="procesarRegistro()">Agregar registro</button>
+            <button id="btnCancelar" class="btn full" style="background:#7f8c8d;display:none" onclick="cancelarEdicion()">Cancelar edición</button>
+          </div>
+        </div>
+        <div class="box">
+          <div class="form" style="margin-bottom:10px">
+            <input type="search" id="q" placeholder="🔎 Buscar..." oninput="render()">
+            <select id="ft" onchange="render()">
+              <option value="">Todos los tipos</option>
+              <option value="ingreso">Ingreso</option>
+              <option value="egreso">Egreso</option>
+              <option value="pendiente">Por cobrar</option>
+              <option value="pagado">Pagado</option>
+            </select>
+          </div>
+          <div class="sc">
+            <table>
+              <thead>
+                <tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th>Tipo</th><th class="n">Cant.</th><th class="n">Monto</th><th>Acciones</th></tr>
+              </thead>
+              <tbody id="tablaRegistros"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN GANANCIAS -->
+      <div id="ganancias" class="tab">
+        <div class="grid2">
+          <div class="box"><h3>🧮 Estado de resultados</h3><div id="pl"></div></div>
+          <div class="box">
+            <h3>🏷️ Calculadora de precio</h3>
+            <div class="form">
+              <select id="cpProd" onchange="cpSel()"><option value="">Elegir producto…</option></select>
+              <input type="number" id="cpCosto" placeholder="Costo por unidad ($)" oninput="cpCalc()">
+              <input type="number" id="cpMg" placeholder="Margen deseado (%)" value="40" oninput="cpCalc()">
+            </div>
+            <div id="cpRes" style="margin-top:12px"></div>
+          </div>
+        </div>
+        <div class="box"><h3>Ganancia por categoría</h3><div class="sc"><table><thead><tr><th>Categoría</th><th class="n">Ventas</th><th class="n">Utilidad</th><th class="n">Margen</th></tr></thead><tbody id="tCatP"></tbody></table></div></div>
+        <div class="box"><h3>Costos y ganancia por producto</h3><div class="sc"><table><thead><tr><th>Producto</th><th class="n">Comprado</th><th class="n">Costo/und</th><th class="n">Vendido</th><th class="n">Ventas</th><th class="n">Costo ventas</th><th class="n">Utilidad</th><th class="n">Margen</th></tr></thead><tbody id="tProd"></tbody></table></div></div>
+      </div>
+
+      <!-- SECCIÓN GASTOS -->
+      <div id="gastos" class="tab">
+        <div class="kpis" id="kGas"></div>
+        <div class="box">
+          <h3>🏷️ Mis categorías de gasto</h3>
+          <div class="form">
+            <input id="ncNom" placeholder="Nombre (Transporte, Publicidad…)">
+            <select id="ncBeh">
+              <option value="operativo">Gasto del negocio (resta utilidad)</option>
+              <option value="otro">Personal / no resta utilidad</option>
+            </select>
+            <button class="btn btn-primary" onclick="addCat()">+ Agregar</button>
+          </div>
+          <div id="catList" style="margin-top:10px"></div>
+        </div>
+        <div class="grid2">
+          <div class="box"><h3>Gastos por categoría</h3><div id="gCat"></div></div>
+          <div class="box"><h3>Mayores gastos</h3><div id="gTop"></div></div>
+        </div>
+        <div class="box">
+          <div class="form" style="margin-bottom:10px">
+            <select id="gf" onchange="render()"></select>
+            <input type="search" id="gq" placeholder="🔎 Buscar gasto..." oninput="render()">
+          </div>
+          <div class="sc"><table><thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th class="n">Cant.</th><th class="n">Monto</th></tr></thead><tbody id="tGas"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN INVENTARIO -->
+      <div id="inventario" class="tab">
+        <div class="box">
+          <h3>📦 Catálogo y stock</h3>
+          <div class="form" style="margin-bottom:10px">
+            <input id="apN" placeholder="Producto nuevo">
+            <input id="apC" list="pcats" placeholder="Categoría (Perfumes, Audio…)">
+            <input type="number" id="apP" placeholder="Precio de venta ($)">
+            <button class="btn btn-primary" onclick="addProd()">+ Al catálogo</button>
+          </div>
+          <datalist id="pcats"></datalist>
+          <div class="sc"><table><thead><tr><th>Producto</th><th>Categoría</th><th class="n">Entradas</th><th class="n">Salidas</th><th class="n">Stock</th><th class="n">Valor (costo)</th><th>Precio venta</th><th></th></tr></thead><tbody id="tablaInventario"></tbody></table></div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN COTIZAR & FACTURACIÓN -->
+      <div id="cotizar" class="tab">
+        <div class="grid2">
+          <div class="box">
+            <h3>💬 Nueva cotización / Factura</h3>
+            <div class="form">
+              <input id="qCli" placeholder="Cliente">
+              <input id="qTel" placeholder="Teléfono (opcional)">
+              <input type="date" id="qFec">
+              <input id="qProd" list="prods" placeholder="Producto" onchange="qSug()">
+              <input type="number" id="qCan" value="1" min="1">
+              <input type="number" id="qPre" placeholder="Precio unidad ($)">
+              <button class="btn btn-primary full" onclick="qAdd()">+ Agregar a la cotización</button>
+            </div>
+            <div class="sc" id="qItems" style="margin-top:10px"></div>
+            <div class="form" style="margin-top:10px">
+              <input type="number" id="qDes" placeholder="Descuento (%)" value="0" oninput="qRender()">
+              <input id="qNota" placeholder="Nota (válida 3 días, envío incluido…)">
+            </div>
+            <div id="qTot"></div>
+            <div class="form" style="margin-top:10px">
+              <button class="btn btn-primary" onclick="qSave()">💾 Guardar</button>
+              <button class="btn" style="background:#25D366" onclick="qCopy()">📋 WhatsApp</button>
+              <button class="btn btn-primary" onclick="qPrint()">🖨️ Imprimir Factura con Logo</button>
+              <button class="btn" style="background:#c4553f" onclick="qNew()">Nueva</button>
+            </div>
+          </div>
+          <div class="box"><h3>Cotizaciones guardadas</h3><div class="sc" id="qList"></div></div>
+        </div>
+      </div>
+
     </div>
-    <div class="box"><h3>Cotizaciones guardadas</h3><div class="sc" id="qList"></div></div>
   </div>
-</div>
-</div>
-<div class="modal" id="modal"><div class="box" style="max-width:420px;margin:14px"><h3>📥 Importar copia</h3><p id="mTxt"></p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="mMerge">Combinar</button><button class="btn o" id="mRep">Reemplazar todo</button><button class="btn" style="background:#7f8c8d" onclick="document.getElementById('modal').classList.remove('on')">Cancelar</button></div></div></div>
-<div id="toast"></div>
 
-<script>
-const KEY='palmascent_data', MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-const BASE={mercancia:'📦 Mercancía',operativo:'🚌 Operativo',personal:'🍔 Personal',general:'📝 General'},CATS={};
-const beh=k=>k==='mercancia'?'mercancia':k==='operativo'?'operativo':(CC[k]?CC[k].b:'otro');
-let R=[],idEditando=null,Q=[],CC={},PR={},EX={meta:0},cur={id:null,items:[]},AVGC={};
-const $=id=>document.getElementById(id);
-const fm=n=>(n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('es-CO');
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const cat=r=>r.categoria||'general', qty=r=>r.cantidad||1, nm=r=>String(r.concepto).toUpperCase().trim();
-const isSale=r=>cat(r)==='mercancia'&&['ingreso','pendiente','pagado'].includes(r.tipo);
-const isBuy=r=>cat(r)==='mercancia'&&r.tipo==='egreso';
-const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-const cl=n=>n>0?'pos':(n<0?'neg':'');
+  <div id="toast"></div>
 
-function guardarEnLocal(){localStorage.setItem(KEY,JSON.stringify(R));localStorage.setItem(KEY+'_extra',JSON.stringify({cotizaciones:Q,categorias:CC,productos:PR,meta:EX.meta}));}
-function cargarDeLocal(){
-  try{const d=JSON.parse(localStorage.getItem(KEY)||'[]'); R=Array.isArray(d)?d:[];}catch(e){R=[];}
-  try{const x=JSON.parse(localStorage.getItem(KEY+'_extra')||'{}');Q=x.cotizaciones||[];CC=x.categorias||{};PR=x.productos||{};EX.meta=x.meta||0;}catch(e){}
-  $('fecha').value=$('qFec').value=iso(new Date());document.body.classList.add('intro');fillCats();render();qList();qRender();setTimeout(()=>document.body.classList.remove('intro'),1500);
-}
-
-/* ---------- periodo ---------- */
-function rango(){
-  const h=new Date(),y=h.getFullYear(),m=h.getMonth(),p=$('per').value;
-  if(p==='mes')return[iso(new Date(y,m,1)),iso(new Date(y,m+1,0))];
-  if(p==='mesant')return[iso(new Date(y,m-1,1)),iso(new Date(y,m,0))];
-  if(p==='30d')return[iso(new Date(y,m,h.getDate()-30)),iso(h)];
-  if(p==='anio')return[y+'-01-01',y+'-12-31'];
-  return['0000-00-00','9999-99-99'];
-}
-const enR=(r,a,b)=>r.fecha>=a&&r.fecha<=b;
-
-/* ---------- cálculos ---------- */
-function calc(){
-  const[a,b]=rango(),P={};
-  R.forEach(r=>{
-    if(cat(r)!=='mercancia')return;
-    const k=nm(r),p=P[k]=P[k]||{n:k,ci:0,cc:0,su:0,vu:0,vs:0};
-    if(isBuy(r)){p.ci+=qty(r);p.cc+=r.monto;}
-    else if(isSale(r)){p.su+=qty(r);if(enR(r,a,b)){p.vu+=qty(r);p.vs+=r.monto;}}
-  });
-  const T={v:0,c:0,o:0,x:0},avg={};
-  const L=Object.values(P);
-  L.forEach(p=>{p.avg=p.ci?p.cc/p.ci:0;avg[p.n]=p.avg;p.cost=p.vu*p.avg;p.ut=p.vs-p.cost;p.stock=p.ci-p.su;p.mg=p.vs?p.ut/p.vs*100:0;T.v+=p.vs;T.c+=p.cost;});
-  R.forEach(r=>{if(r.tipo==='egreso'&&enR(r,a,b)){const h=beh(cat(r));if(h==='operativo')T.o+=r.monto;else if(h!=='mercancia')T.x+=r.monto;}});
-  T.bruta=T.v-T.c;T.neta=T.bruta-T.o;T.mg=T.v?T.neta/T.v*100:0;
-  let saldo=0,cobrar=0;
-  R.forEach(r=>{if(r.tipo==='ingreso'||r.tipo==='pagado')saldo+=r.monto;else if(r.tipo==='egreso')saldo-=r.monto;else if(r.tipo==='pendiente')cobrar+=r.monto;});
-  const inv=L.reduce((s,p)=>s+Math.max(p.stock,0)*p.avg,0);
-  return{L,T,avg,saldo,cobrar,inv,a,b};
-}
-
-/* ---------- gráficos SVG ---------- */
-const ab=v=>Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':Math.abs(v)>=1e3?Math.round(v/1e3)+'k':Math.round(v);
-function chart(labels,series,line){
-  if(!labels.length)return'<p class="mu">Aún no hay datos en este periodo.</p>';
-  const W=700,H=250,L=48,B=28,T=10,w=W-L-8,h=H-B-T,n=labels.length,gw=w/n;
-  const all=series.flatMap(s=>s.v);let mx=Math.max(0,...all),mn=Math.min(0,...all);if(mx===mn)mx=1;
-  const y=v=>T+h*(mx-v)/(mx-mn);
-  let o=`<svg viewBox="0 0 ${W} ${H}" class="svg">`;
-  for(let i=0;i<=4;i++){const v=mn+(mx-mn)*i/4;o+=`<line class="grid" x1="${L}" x2="${W-8}" y1="${y(v)}" y2="${y(v)}"/><text class="tx" x="${L-6}" y="${y(v)+4}" text-anchor="end">${ab(v)}</text>`;}
-  if(line){
-    const pts=series[0].v.map((v,i)=>`${L+gw*(i+.5)},${y(v)}`);
-    o+=`<polyline pathLength="1" points="${pts.join(' ')}" fill="none" style="stroke:var(--g)" stroke-width="2.5"/>`;
-    series[0].v.forEach((v,i)=>o+=`<circle cx="${L+gw*(i+.5)}" cy="${y(v)}" r="3.5" style="fill:var(--g)"><title>${labels[i]}: ${fm(v)}</title></circle>`);
-  }else series.forEach((s,j)=>s.v.forEach((v,i)=>{
-    const bw=gw*.72/series.length,x=L+i*gw+gw*.14+j*bw;
-    o+=`<rect x="${x}" y="${Math.min(y(v),y(0))}" width="${bw}" height="${Math.max(Math.abs(y(v)-y(0)),1)}" rx="2" style="fill:${s.c}"><title>${labels[i]} · ${s.n}: ${fm(v)}</title></rect>`;
-  }));
-  const st=Math.ceil(n/9);
-  labels.forEach((t,i)=>{if(i%st===0)o+=`<text class="tx" x="${L+gw*(i+.5)}" y="${H-8}" text-anchor="middle">${t}</text>`;});
-  return o+'</svg>';
-}
-function keyOf(f,g){
-  if(g==='dia')return f; if(g==='mes')return f.slice(0,7);
-  const d=new Date(f+'T00:00:00');d.setDate(d.getDate()-((d.getDay()+6)%7));return iso(d);
-}
-function lblOf(k,g){
-  if(g==='mes'){const[y,m]=k.split('-');return MES[m-1]+' '+y.slice(2);}
-  const[,m,d]=k.split('-');return d+'/'+m;
-}
-
-/* ---------- render ---------- */
-function render(){
-  const c=calc(),g=$('gran').value,{a,b}=c;AVGC=c.avg;
-  /* KPIs */
-  const kp=(t,v,cls,sub)=>`<div class="k ${cls}"><small>${t}</small><b>${v}</b>${sub?`<small>${sub}</small>`:''}</div>`;
-  $('kCaja').innerHTML=`<div class="hero"><svg class="frond" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M20 190C40 120 90 70 190 40M20 190C60 130 120 100 195 95M20 190C80 150 140 140 190 150M20 190C30 110 60 50 120 10M20 190C20 130 30 80 60 20"/></svg><small>Efectivo en caja</small><b class="big">${fm(c.saldo)}</b><dl><div><dt>Por cobrar</dt><dd>${fm(c.cobrar)}</dd></div><div><dt>Patrimonio (caja + cobrar)</dt><dd>${fm(c.saldo+c.cobrar)}</dd></div><div><dt>Inventario a costo</dt><dd>${fm(c.inv)}</dd></div></dl></div>`;
-  if(document.body.classList.contains('intro'))countUp(document.querySelector('.hero .big'),c.saldo);
-  const T=c.T;
-  $('kPer').innerHTML=kp('Ventas',fm(T.v),'l')+kp('Utilidad bruta',fm(T.bruta),'l')+kp('Gastos operativos',fm(T.o),'l')+kp('Utilidad neta',`<span class="${cl(T.neta)}">${fm(T.neta)}</span>`,'l',T.mg.toFixed(1)+'% margen');
-
-  /* barras por periodo */
-  const B_={};
-  R.forEach(r=>{
-    if(!enR(r,a,b))return; const k=keyOf(r.fecha,g);
-    const o=B_[k]=B_[k]||{v:0,u:0};
-    if(isSale(r)){o.v+=r.monto;o.u+=r.monto-qty(r)*(c.avg[nm(r)]||0);}
-    else if(r.tipo==='egreso'&&beh(cat(r))==='operativo')o.u-=r.monto;
-  });
-  const ks=Object.keys(B_).sort().slice(-24);
-  $('chBar').innerHTML=chart(ks.map(k=>lblOf(k,g)),[{n:'Ventas',c:'var(--g)',v:ks.map(k=>B_[k].v)},{n:'Utilidad neta',c:'var(--a)',v:ks.map(k=>B_[k].u)}]);
-
-  /* línea de caja */
-  const asc=R.slice().sort((x,y)=>x.fecha<y.fecha?-1:x.fecha>y.fecha?1:x.id-y.id),S={};let s=0;
-  asc.forEach(r=>{if(r.tipo==='ingreso'||r.tipo==='pagado')s+=r.monto;else if(r.tipo==='egreso')s-=r.monto;S[keyOf(r.fecha,g)]=s;});
-  const lk=Object.keys(S).sort().slice(-24);
-  $('chLine').innerHTML=chart(lk.map(k=>lblOf(k,g)),[{n:'Caja',v:lk.map(k=>S[k])}],true);
-
-  /* top productos */
-  const top=c.L.filter(p=>p.vu>0).sort((x,y)=>y.ut-x.ut).slice(0,6),mxu=Math.max(1,...top.map(p=>Math.abs(p.ut)));
-  $('top').innerHTML=top.length?top.map(p=>`<div class="hb"><span>${esc(p.n)}</span><div class="t"><span style="width:${Math.max(Math.abs(p.ut)/mxu*100,2)}%;background:${p.ut>=0?'var(--g)':'var(--r)'}"></span></div><b class="${cl(p.ut)}" style="text-align:right">${fm(p.ut)}</b></div>`).join(''):'<p class="mu">Sin ventas en este periodo.</p>';
-
-  /* por cobrar */
-  const pen=R.filter(r=>r.tipo==='pendiente');
-  $('cobrar').innerHTML=pen.length?`<table><tbody>${pen.map(r=>`<tr><td>${r.fecha}</td><td><b>${esc(r.concepto)}</b>${r.cliente?` <small class="mu">· ${esc(r.cliente)}</small>`:''}</td><td class="pen n">${fm(r.monto)}</td><td><button class="btn b s" onclick="marcarPagado(${r.id})">☑️ Pagado</button></td></tr>`).join('')}</tbody></table>`:'<p class="mu">Nadie te debe nada 🎉</p>';
-
-  /* alertas */
-  const al=[];
-  const neg=c.L.filter(p=>p.stock<0),sc=c.L.filter(p=>p.su>0&&p.ci===0);
-  if(neg.length)al.push(`⚠️ Stock negativo (vendiste más de lo comprado): <b>${neg.map(p=>esc(p.n)).join(', ')}</b>`);
-  if(sc.length)al.push(`⚠️ Productos vendidos sin compra registrada (su utilidad se ve inflada): <b>${sc.map(p=>esc(p.n)).join(', ')}</b>`);
-  const low=c.L.filter(p=>p.stock===1);if(low.length)al.push(`📉 Casi agotados (queda 1 und): <b>${low.map(p=>esc(p.n)).join(', ')}</b>`);
-  $('alertas').innerHTML=al.map(t=>`<div class="al">${t}</div>`).join('');
-
-  renderMov(); renderGan(c); renderCatP(c); renderGas(c); renderInv(c); renderMeta();
-  $('prods').innerHTML=allProds(c).map(p=>`<option value="${esc(p.n)}">`).join('');
-}
-
-function renderMov(){
-  const q=$('q').value.toLowerCase(),ft=$('ft').value;
-  const rows=R.slice().sort((x,y)=>x.fecha<y.fecha?1:x.fecha>y.fecha?-1:y.id-x.id)
-    .filter(r=>(!ft||r.tipo===ft)&&(!q||(r.concepto+cat(r)).toLowerCase().includes(q)));
-  const mapa={ingreso:['pos','+ $'],egreso:['neg','- $'],pendiente:['pen','☐ $'],pagado:['pag','☑ $']};
-  $('tablaRegistros').innerHTML=rows.map(r=>{
-    const[cc,sy]=mapa[r.tipo]||['',''];
-    return `<tr><td>${r.fecha}</td><td><b>${esc(r.concepto)}</b>${r.cliente?` <small class="mu">· ${esc(r.cliente)}</small>`:''}</td><td><small>${CATS[cat(r)]}</small></td><td class="${cc}">${esc(r.tipo).toUpperCase()}</td><td class="n">${qty(r)}</td><td class="n ${cc}">${sy}${Math.round(r.monto).toLocaleString('es-CO')}</td>
-    <td>${r.tipo==='pendiente'?`<button class="btn b s" onclick="marcarPagado(${r.id})">☑️</button> `:''}<button class="btn o s" onclick="editarRegistro(${r.id})">✏️</button> <button class="btn r s" onclick="borrarRegistro(${r.id})">🗑️</button></td></tr>`;
-  }).join('')||'<tr><td colspan="7" class="mu">Sin registros.</td></tr>';
-}
-
-function renderGan(c){
-  const T=c.T,row=(t,v,cls)=>`<tr class="${cls||''}"><td>${t}</td><td class="n ${cl(v)}">${fm(v)}</td></tr>`;
-  $('pl').innerHTML=`<table class="pl"><tbody>${row('Ventas de mercancía',T.v)}${row('− Costo de lo vendido',-T.c)}${row('= Utilidad bruta',T.bruta,'t')}${row('− Gastos operativos',-T.o)}${row('= Utilidad neta del negocio',T.neta,'t')}</tbody></table>
-  <p class="mu">Margen neto: <b>${T.mg.toFixed(1)}%</b> · Retiros personales y otros gastos en el periodo: <b>${fm(T.x)}</b></p>`;
-  $('tProd').innerHTML=c.L.slice().sort((x,y)=>y.ut-x.ut).map(p=>`<tr><td><b>${esc(p.n)}</b></td><td class="n">${p.ci}</td><td class="n">${fm(p.avg)}</td><td class="n">${p.vu}</td><td class="n">${fm(p.vs)}</td><td class="n">${fm(p.cost)}</td><td class="n ${cl(p.ut)}">${fm(p.ut)}</td><td class="n">${p.vs?p.mg.toFixed(0)+'%':'—'}</td></tr>`).join('')||'<tr><td colspan="8" class="mu">Sin datos de mercancía.</td></tr>';
-  const sel=$('cpProd'),v=sel.value;
-  sel.innerHTML='<option value="">Elegir producto…</option>'+c.L.map(p=>`<option value="${p.avg}">${esc(p.n)} (${fm(p.avg)})</option>`).join('');sel.value=v;cpCalc();
-}
-function cpSel(){const v=$('cpProd').value;if(v!=='')$('cpCosto').value=Math.round(v);cpCalc();}
-function cpCalc(){
-  const co=parseFloat($('cpCosto').value),m=parseFloat($('cpMg').value);
-  $('cpRes').innerHTML=(co>0&&m>=0&&m<100)?`<div class="k" style="background:var(--g)"><small>Precio de venta sugerido</small><b>${fm(Math.ceil(co/(1-m/100)/500)*500)}</b><small>Ganancia por unidad ≈ ${fm(Math.ceil(co/(1-m/100)/500)*500-co)} (redondeado a $500)</small></div>`:'<p class="mu">Ingresa un costo y un margen para ver el precio.</p>';
-}
-
-function renderGas(c){
-  const{a,b}=c,all=R.filter(r=>r.tipo==='egreso'&&enR(r,a,b)),tot=all.reduce((s,r)=>s+r.monto,0);
-  const by={};all.forEach(r=>by[cat(r)]=(by[cat(r)]||0)+r.monto);
-  const mx=all.slice().sort((x,y)=>y.monto-x.monto);
-  $('kGas').innerHTML=[['Total gastado',fm(tot)],['Nº de gastos',all.length],['Promedio por gasto',fm(all.length?tot/all.length:0)],['Mayor gasto',fm(mx[0]?mx[0].monto:0)]].map(x=>`<div class="k l"><small>${x[0]}</small><b>${x[1]}</b></div>`).join('');
-  $('gCat').innerHTML=Object.keys(CATS).map(k=>`<div class="hb"><span>${CATS[k]}</span><div class="t"><span style="width:${tot?(by[k]||0)/tot*100:0}%"></span></div><b style="text-align:right">${fm(by[k]||0)}</b></div>`).join('')+`<p class="mu">Las compras de mercancía son inversión: se recuperan al vender.</p>`;
-  $('gTop').innerHTML=mx.slice(0,5).map(r=>`<div class="hb" style="grid-template-columns:1fr 90px"><span>${esc(r.concepto)} <small class="mu">${r.fecha}</small></span><b class="neg" style="text-align:right">${fm(r.monto)}</b></div>`).join('')||'<p class="mu">Sin gastos en este periodo.</p>';
-  const f=$('gf').value,q=$('gq').value.toLowerCase();
-  const rows=all.filter(r=>(!f||cat(r)===f)&&(!q||r.concepto.toLowerCase().includes(q))).sort((x,y)=>x.fecha<y.fecha?1:x.fecha>y.fecha?-1:y.id-x.id);
-  $('tGas').innerHTML=rows.map(r=>`<tr><td>${r.fecha}</td><td><b>${esc(r.concepto)}</b></td><td><small>${CATS[cat(r)]}</small></td><td class="n">${qty(r)}</td><td class="n neg">${fm(r.monto)}</td></tr>`).join('')+(rows.length?`<tr class="pl t"><td colspan="4"><b>Total filtrado</b></td><td class="n neg"><b>${fm(rows.reduce((s,r)=>s+r.monto,0))}</b></td></tr>`:'<tr><td colspan="5" class="mu">Sin gastos.</td></tr>');
-}
-
-/* ---------- CRUD ---------- */
-function procesarRegistro(){
-  const fecha=$('fecha').value,concepto=$('concepto').value.trim(),monto=parseFloat($('monto').value),tipo=$('tipo').value,categoria=$('categoria').value,cantidad=parseInt($('cantidad').value)||1;
-  if(!fecha||!concepto||isNaN(monto)){alert('Completa Fecha, Concepto y Monto.');return;}
-  if(idEditando!==null){
-    const i=R.findIndex(r=>r.id===idEditando);
-    if(i!==-1){const t=(R[i].tipo==='pagado'&&tipo==='pendiente')?'pagado':tipo;R[i]={...R[i],id:idEditando,fecha,concepto,monto,tipo:t,categoria,cantidad};}
-    cancelarEdicion();
-  }else{
-    R.push({id:Date.now(),fecha,concepto,monto,tipo,categoria,cantidad});
-    $('concepto').value='';$('monto').value='';$('cantidad').value='1';
-  }
-  guardarEnLocal();render();
-}
-function editarRegistro(id){
-  const r=R.find(x=>x.id===id);if(!r)return;
-  $('fecha').value=r.fecha;$('concepto').value=r.concepto;$('monto').value=r.monto;
-  $('tipo').value=r.tipo==='pagado'?'pendiente':r.tipo;$('categoria').value=cat(r);$('cantidad').value=qty(r);
-  idEditando=id;$('btnAccion').innerText='Guardar cambios';$('btnAccion').classList.add('o');$('btnCancelar').style.display='block';
-  verTab('finanzas');$('formularioArea').scrollIntoView({behavior:'smooth'});
-}
-function cancelarEdicion(){
-  idEditando=null;$('btnAccion').innerText='Agregar registro';$('btnAccion').classList.remove('o');$('btnCancelar').style.display='none';
-  $('concepto').value='';$('monto').value='';$('cantidad').value='1';
-}
-function marcarPagado(id){const r=R.find(x=>x.id===id);if(r){r.tipo='pagado';guardarEnLocal();render();}}
-function borrarRegistro(id){if(confirm('¿Estás seguro de eliminar este registro?')){R=R.filter(r=>r.id!==id);guardarEnLocal();render();}}
-
-/* ---------- pestañas ---------- */
-function verTab(id){
-  window.scrollTo(0,0);
-  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.id===id));
-  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===id));
-}
-$('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.t)verTab(b.dataset.t);});
-
-/* ---------- categorías de gasto ---------- */
-function fillCats(){
-  Object.keys(CATS).forEach(k=>delete CATS[k]);Object.assign(CATS,BASE);Object.keys(CC).forEach(k=>CATS[k]='🏷️ '+CC[k].n);
-  const o=Object.keys(CATS).map(k=>`<option value="${esc(k)}">${esc(CATS[k])}</option>`).join('');
-  const v=$('categoria').value,g=$('gf').value;
-  $('categoria').innerHTML=o;$('categoria').value=v||'mercancia';
-  $('gf').innerHTML='<option value="">Todas las categorías</option>'+o;$('gf').value=g;
-  $('catList').innerHTML=Object.keys(CC).map(k=>`<span class="chip">${esc(CC[k].n)} <small>(${CC[k].b==='operativo'?'resta utilidad':'personal'})</small> <a onclick="delCat('${k}')">✕</a></span>`).join('')||'<span class="mu">Aún no creaste categorías. Base: Mercancía, Operativo, Personal y General.</span>';
-}
-function addCat(){
-  const n=$('ncNom').value.trim(),k='c_'+n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_');
-  if(!n||k.length<3||CATS[k]){toast('Escribe un nombre nuevo para la categoría');return;}
-  CC[k]={n,b:$('ncBeh').value};$('ncNom').value='';guardarEnLocal();fillCats();render();
-}
-function delCat(k){
-  const u=R.filter(r=>cat(r)===k).length;
-  if(!confirm('¿Eliminar "'+CC[k].n+'"?'+(u?' Sus '+u+' registros pasarán a General.':'')))return;
-  R.forEach(r=>{if(cat(r)===k)r.categoria='general';});delete CC[k];guardarEnLocal();fillCats();render();
-}
-
-/* ---------- catálogo de productos ---------- */
-const PN=n=>String(n).toUpperCase().trim();
-function allProds(c){
-  const m={};c.L.forEach(p=>m[p.n]=p);
-  Object.keys(PR).forEach(k=>{if(!m[k])m[k]={n:k,ci:0,cc:0,su:0,vu:0,vs:0,avg:0,cost:0,ut:0,stock:0,mg:0};});
-  return Object.values(m);
-}
-function precioSug(n){
-  if(PR[n]&&PR[n].precio)return PR[n].precio;
-  let b=null;R.forEach(r=>{if(isSale(r)&&nm(r)===n&&r.monto>0&&(!b||r.fecha>=b.fecha))b=r;});
-  return b?Math.round(b.monto/qty(b)):0;
-}
-function setProd(n,f,v){PR[n]=PR[n]||{};PR[n][f]=f==='precio'?(parseFloat(v)||0):v.trim();guardarEnLocal();renderGan(calc());renderCatP(calc());}
-function addProd(){const n=PN($('apN').value);if(!n){toast('Escribe el nombre del producto');return;}PR[n]=Object.assign(PR[n]||{},{cat:$('apC').value.trim(),precio:parseFloat($('apP').value)||0});['apN','apC','apP'].forEach(i=>$(i).value='');guardarEnLocal();render();}
-function delProd(n){delete PR[n];guardarEnLocal();render();}
-function renderInv(c){
-  const L=allProds(c).sort((x,y)=>x.n.localeCompare(y.n));
-  $('pcats').innerHTML=[...new Set(Object.values(PR).map(p=>p.cat).filter(Boolean))].map(v=>`<option value="${esc(v)}">`).join('');
-  $('tablaInventario').innerHTML=L.map(p=>{const e=PR[p.n]||{};return `<tr><td><b>${esc(p.n)}</b></td><td><input data-n="${esc(p.n)}" value="${esc(e.cat||'')}" list="pcats" placeholder="Categoría" onchange="setProd(this.dataset.n,'cat',this.value)" style="width:130px"></td><td class="n">${p.ci}</td><td class="n">${p.su}</td><td class="n ${p.stock>0?'pos':'neg'}">${p.stock} und</td><td class="n">${fm(Math.max(p.stock,0)*p.avg)}</td><td><input type="number" data-n="${esc(p.n)}" value="${e.precio||''}" placeholder="${precioSug(p.n)||''}" onchange="setProd(this.dataset.n,'precio',this.value)" style="width:105px"></td><td>${p.ci||p.su?'':`<button class="btn r s" data-n="${esc(p.n)}" onclick="delProd(this.dataset.n)">✕</button>`}</td></tr>`;}).join('')||'<tr><td colspan="8" class="mu">Sin mercancía.</td></tr>';
-}
-function renderCatP(c){
-  const G={};allProds(c).forEach(p=>{const k=(PR[p.n]&&PR[p.n].cat)||'Sin categoría',g=G[k]=G[k]||{v:0,u:0};g.v+=p.vs;g.u+=p.ut;});
-  $('tCatP').innerHTML=Object.keys(G).sort((a,b)=>G[b].u-G[a].u).map(k=>`<tr><td><b>${esc(k)}</b></td><td class="n">${fm(G[k].v)}</td><td class="n ${cl(G[k].u)}">${fm(G[k].u)}</td><td class="n">${G[k].v?(G[k].u/G[k].v*100).toFixed(0)+'%':'—'}</td></tr>`).join('')||'<tr><td colspan="4" class="mu">Sin datos.</td></tr>';
-}
-function renderMeta(){
-  const m=iso(new Date()).slice(0,7),v=R.filter(r=>isSale(r)&&String(r.fecha).slice(0,7)===m).reduce((s,r)=>s+r.monto,0),g=EX.meta||0,p=g?Math.min(v/g*100,100):0;
-  $('meta').innerHTML=`<div class="bar"><b>🎯 Meta de ventas de este mes</b><span>Meta: <input type="number" value="${g||''}" placeholder="$ meta" style="width:130px" onchange="EX.meta=parseFloat(this.value)||0;guardarEnLocal();renderMeta()"></span></div><div class="hb" style="grid-template-columns:1fr 160px"><div class="t"><span style="width:${p}%;background:var(--g)"></span></div><b style="text-align:right">${fm(v)}${g?' / '+ab(g)+' ('+Math.round(v/g*100)+'%)':''}</b></div>`;
-}
-
-/* ---------- cotizaciones ---------- */
-const qT=q=>{const s=q.items.reduce((a,i)=>a+i.can*i.pre,0);return{s,t:s*(1-Math.min(Math.max(q.des||0,0),100)/100)};};
-function qCur(){return{id:cur.id,num:cur.num,est:cur.est||'pendiente',cli:$('qCli').value.trim(),tel:$('qTel').value.trim(),fec:$('qFec').value,items:cur.items.map(i=>({...i})),des:parseFloat($('qDes').value)||0,nota:$('qNota').value.trim()};}
-function qSug(){const n=PN($('qProd').value);if(n)$('qPre').value=precioSug(n)||'';}
-function qAdd(){
-  const n=PN($('qProd').value),can=parseInt($('qCan').value)||1,pre=parseFloat($('qPre').value);
-  if(!n||isNaN(pre)){toast('Elige un producto y escribe el precio');return;}
-  cur.items.push({n,can,pre});$('qProd').value='';$('qPre').value='';$('qCan').value='1';qRender();
-}
-function qSet(k,f,v){cur.items[k][f]=f==='can'?(parseInt(v)||1):(parseFloat(v)||0);qRender();}
-function qRender(){
-  $('qItems').innerHTML=cur.items.length?`<table><tbody>${cur.items.map((i,k)=>`<tr><td><b>${esc(i.n)}</b></td><td><input type="number" min="1" value="${i.can}" style="width:62px" onchange="qSet(${k},'can',this.value)"></td><td><input type="number" value="${i.pre}" style="width:105px" onchange="qSet(${k},'pre',this.value)"></td><td class="n">${fm(i.can*i.pre)}</td><td><button class="btn r s" onclick="cur.items.splice(${k},1);qRender()">✕</button></td></tr>`).join('')}</tbody></table>`:'<p class="mu">Agrega productos para armar la cotización.</p>';
-  const q=qCur(),t=qT(q),costo=q.items.reduce((s,i)=>s+i.can*(AVGC[i.n]||0),0);
-  $('qTot').innerHTML=q.items.length?`<div class="k" style="background:var(--g);margin-top:10px"><small>Total a cotizar${q.des?' (−'+q.des+'%)':''}</small><b>${fm(t.t)}</b><small>Tu ganancia estimada: ${fm(t.t-costo)} (solo tú la ves)</small></div>`:'';
-}
-function qSave(){
-  const q=qCur();if(!q.items.length){toast('Agrega productos primero');return;}
-  if(q.id){Q[Q.findIndex(x=>x.id===q.id)]=q;}else{q.id=Date.now();q.num=Q.reduce((m,x)=>Math.max(m,x.num||0),0)+1;Q.push(q);cur.id=q.id;cur.num=q.num;}
-  guardarEnLocal();qList();toast('💾 Cotización N° '+q.num+' guardada');
-}
-function qNew(){cur={id:null,items:[]};['qCli','qTel','qNota'].forEach(i=>$(i).value='');$('qDes').value=0;$('qFec').value=iso(new Date());qRender();}
-function qLoad(id){
-  const q=Q.find(x=>x.id===id);if(!q)return;
-  cur={id:q.id,num:q.num,est:q.est,items:q.items.map(i=>({...i}))};
-  $('qCli').value=q.cli||'';$('qTel').value=q.tel||'';$('qFec').value=q.fec;$('qDes').value=q.des||0;$('qNota').value=q.nota||'';
-  qRender();window.scrollTo({top:0,behavior:'smooth'});
-}
-const qGet=id=>typeof id==='number'?Q.find(x=>x.id===id):qCur();
-function qText(q){
-  const t=qT(q);
-  return '*Cotización Palmascent* 🌴\n'+(q.cli?'Cliente: '+q.cli+'\n':'')+'Fecha: '+q.fec+'\n\n'+q.items.map(i=>'• '+i.can+' x '+i.n+' — '+fm(i.can*i.pre)).join('\n')+(q.des?'\n\nDescuento: '+q.des+'%':'')+'\n*TOTAL: '+fm(t.t)+'*'+(q.nota?'\n\n'+q.nota:'');
-}
-function qCopy(id){
-  const q=qGet(id);if(!q||!q.items.length){toast('La cotización está vacía');return;}
-  const tx=qText(q);(navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(()=>toast('📋 Copiada, pégala en WhatsApp'),()=>prompt('Copia este texto:',tx));
-}
-function qPrint(id){
-  const q=qGet(id);if(!q||!q.items.length){toast('La cotización está vacía');return;}
-  const t=qT(q),w=window.open('','_blank');if(!w){toast('Permite las ventanas emergentes para imprimir');return;}
-  const rows=q.items.map(i=>`<tr><td>${esc(i.n)}</td><td class=r>${i.can}</td><td class=r>${fm(i.pre)}</td><td class=r>${fm(i.can*i.pre)}</td></tr>`).join('');
-  w.document.write(`<html><head><meta charset="utf-8"><title>Cotización ${q.num||''}</title><style>body{font-family:Segoe UI,sans-serif;max-width:700px;margin:30px auto;color:#222}table{width:100%;border-collapse:collapse;margin-top:18px}th,td{padding:9px;border-bottom:1px solid #ddd;text-align:left}.r{text-align:right}.t{font-size:1.5em;text-align:right;margin-top:16px}</style></head><body><h1 style="margin:0">🌴 Palmascent</h1><p>Cotización${q.num?' N° '+q.num:''} · ${q.fec}<br>${q.cli?'Cliente: <b>'+esc(q.cli)+'</b>':''}${q.tel?' · '+esc(q.tel):''}</p><table><tr><th>Producto</th><th class=r>Cant.</th><th class=r>Precio</th><th class=r>Subtotal</th></tr>${rows}</table>${q.des?`<p class=r style="text-align:right">Subtotal ${fm(t.s)} · Descuento ${q.des}%</p>`:''}<div class=t><b>Total: ${fm(t.t)}</b></div>${q.nota?`<p>${esc(q.nota)}</p>`:''}<script>onload=()=>print()<\/script></body></html>`);
-  w.document.close();
-}
-function qList(){
-  $('qList').innerHTML=Q.length?`<table><thead><tr><th>N°</th><th>Cliente</th><th>Fecha</th><th class="n">Total</th><th>Estado</th><th></th></tr></thead><tbody>${Q.slice().sort((a,b)=>b.id-a.id).map(q=>`<tr><td>${q.num}</td><td><b>${esc(q.cli||'—')}</b></td><td>${q.fec}</td><td class="n">${fm(qT(q).t)}</td><td><select style="width:auto" onchange="qEst(${q.id},this.value)">${['pendiente','aceptada','rechazada','vendida'].map(e=>`<option ${q.est===e?'selected':''}>${e}</option>`).join('')}</select></td><td><button class="btn o s" onclick="qLoad(${q.id})">✏️</button> <button class="btn b s" onclick="qCopy(${q.id})">📋</button> <button class="btn p s" onclick="qPrint(${q.id})">🖨️</button> <button class="btn s" onclick="qVender(${q.id},'ingreso')">💵</button> <button class="btn o s" onclick="qVender(${q.id},'pendiente')">☐</button> <button class="btn r s" onclick="qDel(${q.id})">🗑️</button></td></tr>`).join('')}</tbody></table><p class="mu">💵 vender de contado · ☐ vender fiado (pasa a "Por cobrar")</p>`:'<p class="mu">Aún no has guardado cotizaciones.</p>';
-}
-function qEst(id,v){const q=Q.find(x=>x.id===id);if(q){q.est=v;guardarEnLocal();}}
-function qDel(id){if(confirm('¿Eliminar esta cotización?')){Q=Q.filter(x=>x.id!==id);guardarEnLocal();qList();}}
-function qVender(id,tipo){
-  const q=Q.find(x=>x.id===id);
-  if(!q||(q.est==='vendida'&&!confirm('Esta cotización ya se convirtió en venta. ¿Registrarla otra vez?')))return;
-  const f=iso(new Date()),d=1-(q.des||0)/100;
-  q.items.forEach((i,k)=>R.push({id:Date.now()+k,fecha:f,concepto:i.n,monto:Math.round(i.can*i.pre*d),tipo,categoria:'mercancia',cantidad:i.can,cliente:q.cli||''}));
-  q.est='vendida';guardarEnLocal();render();toast('✅ Venta registrada en Movimientos'+(tipo==='pendiente'?' (por cobrar)':''));
-}
-
-function countUp(el,v){
-  if(!el||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const t0=performance.now();(function f(t){const p=Math.min((t-t0)/800,1);el.textContent=fm(v*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f);})(t0);
-}
-/* ---------- avisos ---------- */
-function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),3800);}
-
-/* ---------- importar / exportar ---------- */
-function leerBackup(txt){
-  let d=JSON.parse(txt.replace(/^\uFEFF/,'')),x={};
-  if(d&&!Array.isArray(d)&&typeof d==='object'){x=d;d=d.registros||d.movimientos||d.data;}
-  if(!Array.isArray(d))throw 0;
-  const ids=new Set();
-  d=d.filter(r=>r&&typeof r==='object'&&r.concepto!==undefined&&r.tipo).map((r,i)=>{
-    r.monto=Number(r.monto)||0;r.tipo=String(r.tipo).toLowerCase();r.fecha=String(r.fecha||iso(new Date())).slice(0,10);
-    if(r.cantidad!==undefined)r.cantidad=Number(r.cantidad)||1;
-    let id=Number(r.id);if(!id||ids.has(id))id=Date.now()+i;ids.add(id);r.id=id;return r;});
-  return{d,x};
-}
-function cargarJSON(file){
-  const f=file||$('fileInput').files[0];if(!f)return;
-  const rd=new FileReader();
-  rd.onload=e=>{
-    try{
-      const b=leerBackup(e.target.result);
-      if(!R.length&&!Q.length)aplicar(b,'rep');
-      else{
-        $('mTxt').innerHTML='El archivo trae <b>'+b.d.length+'</b> movimientos. Ahora tienes <b>'+R.length+'</b>.<br><small>Combinar agrega solo lo que no tengas (por ID); reemplazar borra lo actual.</small>';
-        $('mMerge').onclick=()=>aplicar(b,'mer');$('mRep').onclick=()=>aplicar(b,'rep');$('modal').classList.add('on');
-      }
-    }catch(err){toast('❌ No pude leer ese archivo. ¿Es una copia .json de Palmascent?');}
-  };
-  rd.onerror=()=>toast('❌ No se pudo abrir el archivo');
-  rd.readAsText(f);$('fileInput').value='';
-}
-function aplicar(b,m){
-  $('modal').classList.remove('on');const x=b.x;let n=b.d.length;
-  if(m==='rep'){R=b.d;if(x.cotizaciones)Q=x.cotizaciones;if(x.categorias)CC=x.categorias;if(x.productos)PR=x.productos;if(x.meta!==undefined)EX.meta=x.meta;}
-  else{
-    const ids=new Set(R.map(r=>r.id)),nu=b.d.filter(r=>!ids.has(r.id));n=nu.length;R=R.concat(nu);
-    const qi=new Set(Q.map(q=>q.id));Q=Q.concat((x.cotizaciones||[]).filter(q=>!qi.has(q.id)));
-    Object.assign(CC,x.categorias||{});PR=Object.assign({},x.productos||{},PR);
-  }
-  R.forEach(r=>{const k=cat(r);if(!BASE[k]&&!CC[k])CC[k]={n:k,b:'otro'};});
-  guardarEnLocal();fillCats();render();qList();toast('✅ Copia '+(m==='rep'?'cargada':'combinada')+': '+n+' movimientos');
-}
-['dragover','drop'].forEach(ev=>document.addEventListener(ev,e=>{e.preventDefault();if(ev==='drop'&&e.dataTransfer&&e.dataTransfer.files[0])cargarJSON(e.dataTransfer.files[0]);}));
-function exportarJSON(){
-  if(!R.length&&!Q.length){alert('No hay datos para exportar.');return;}
-  const url=URL.createObjectURL(new Blob([JSON.stringify({version:5,registros:R,cotizaciones:Q,categorias:CC,productos:PR,meta:EX.meta},null,2)],{type:'application/json'}));
-  const a=document.createElement('a');a.href=url;a.download='backup_palmascent_v5.json';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
-}
-window.onload=cargarDeLocal;
-</script>
+  <!-- SDKs de Firebase Firestore y Auth (Conexión Nube) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

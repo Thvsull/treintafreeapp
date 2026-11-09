@@ -1,0 +1,96 @@
+:root {
+  --bg: #0d1a16;
+  --card: #152620;
+  --tx: #e8f3ed;
+  --mu: #89a396;
+  --bd: #21382f;
+  --g: #25a076;
+  --gd: #0c3328;
+  --r: #e06c53;
+  --o: #e69d2e;
+  --a: #eab33d;
+  --bl: #4ca3cc;
+  --in: #1b3028;
+  --disp: 'Fraunces', Georgia, serif;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: 'Figtree', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--tx);
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Pantalla de Login */
+.auth-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: radial-gradient(circle at top, #163e32 0%, var(--bg) 70%);
+}
+.auth-card {
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 20px;
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+.brand-logo-area { text-align: center; margin-bottom: 24px; }
+.brand-logo { max-height: 70px; margin-bottom: 12px; border-radius: 8px; }
+.auth-card h1 { font-family: var(--disp); margin: 0; font-size: 1.8em; color: var(--tx); }
+.auth-card p { color: var(--mu); font-size: 0.9em; margin-top: 4px; }
+
+/* Controles de Formulario */
+.field { margin-bottom: 16px; text-align: left; }
+.field label { display: block; font-size: 0.85em; margin-bottom: 6px; color: var(--mu); }
+input, select, button { font: inherit; }
+input, select {
+  padding: 12px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  background: var(--in);
+  color: var(--tx);
+  width: 100%;
+}
+input:focus, select:focus { outline: none; border-color: var(--g); box-shadow: 0 0 0 3px rgba(37, 160, 118, 0.25); }
+
+/* Layout de la App */
+.wrap { max-width: 1150px; margin: auto; padding: 20px 14px 40px; }
+.mast { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.brand-header { display: flex; align-items: center; gap: 14px; }
+.app-logo { max-height: 50px; border-radius: 8px; }
+.mast h1 { font-family: var(--disp); font-size: 2em; margin: 0; }
+.mast p { margin: 0; color: var(--mu); font-size: 0.88em; }
+
+/* Botones */
+.btn {
+  border: 0; border-radius: 10px; padding: 10px 16px; color: #fff;
+  font-weight: 600; cursor: pointer; background: var(--g);
+  transition: transform 0.1s, filter 0.2s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--gd); border: 1px solid rgba(255,255,255,0.15); }
+.btn-outline { background: transparent; border: 1px solid var(--bd); color: var(--mu); }
+.btn-sm { padding: 6px 10px; font-size: 0.8em; }
+.full { grid-column: 1/-1; width: 100%; }
+
+/* Tarjetas y Tablas */
+.box { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+.tabs { display: flex; gap: 6px; padding: 6px; background: var(--card); border: 1px solid var(--bd); border-radius: 999px; margin-bottom: 20px; }
+.tabs button { flex: 1; border: 0; padding: 10px; border-radius: 999px; background: transparent; color: var(--mu); font-weight: 600; cursor: pointer; }
+.tabs button.on { background: var(--gd); color: #fff; }
+.tab { display: none; } .tab.on { display: block; }
+.sc { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--bd); }
+th { color: var(--mu); font-weight: 500; }
+td.n, th.n { text-align: right; }
+.pos { color: var(--g); font-weight: 600; } .neg { color: var(--r); font-weight: 600; }
