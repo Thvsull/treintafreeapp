@@ -183,7 +183,7 @@
 <div class="login" id="login"><div class="box lg"><h1>🌴 Palmascent</h1><p class="mu">Inicia sesión para ver tu negocio desde cualquier dispositivo.</p>
   <input id="lgE" type="email" placeholder="Correo" autocomplete="email"><input id="lgP" type="password" placeholder="Contraseña (mínimo 6)" autocomplete="current-password">
   <button class="btn" onclick="auth('in')">Entrar</button><button class="btn p" onclick="auth('up')">Crear cuenta</button>
- 
+ <button class="btn" style="background:transparent;color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)" onclick="usarLocal()">Continuar sin cuenta</button><p class="mu" style="text-align:center">Sin cuenta todo funciona, pero los datos quedan solo en este dispositivo. Puedes iniciar sesión luego tocando el estado de guardado (arriba a la derecha).</p><p id="lgM" class="mu"></p></div></div>
 <div class="modal" id="modal"><div class="box" style="max-width:420px;margin:14px"><h3>📥 Importar copia</h3><p id="mTxt"></p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="mMerge">Combinar</button><button class="btn o" id="mRep">Reemplazar todo</button><button class="btn" style="background:#7f8c8d" onclick="document.getElementById('modal').classList.remove('on')">Cancelar</button></div></div></div>
 <div id="toast"></div>
 
