@@ -416,7 +416,7 @@ function empujar(){
   pushT=setTimeout(async()=>{
     if(!navigator.onLine){estado('📴 Sin conexión: se subirá al volver');return;}
     try{const{error}=await SB.from('palmascent_data').upsert({user_id:USER.id,data:{version:6,registros:R,cotizaciones:Q,categorias:CC,productos:PR,meta:EX.meta,clientes:CL,empresa:EMP},updated_at:new Date(TS).toISOString()});
-      estado(error?'⚠️ Error de nube':'☁️ Sincronizado');}catch(e){estado('📴 Sin conexión');}
+      estado(error?'⚠️ Error de nube':'☁️ Sincronizado');if(!error)publicarTienda();}catch(e){estado('📴 Sin conexión');}
   },900);
 }
 async function nubeSync(){
@@ -470,6 +470,19 @@ function diag(){
 }
 function usarLocal(){localStorage.setItem(KEY+'_solo','1');$('login').classList.remove('on');estado('● Solo en este dispositivo');}
 async function salir(){if(SB)await SB.auth.signOut();USER=null;localStorage.removeItem(KEY+'_solo');$('login').classList.add('on');estado('● Sin sesión');}
+async function publicarTienda(manual){
+  if(!SB||!USER)return;
+  try{
+    const{data,error}=await SB.from('tienda_catalogo').select('data').eq('id',1).maybeSingle();
+    if(error)throw error;
+    if(!data||!data.data||!Array.isArray(data.data.productos)){if(manual)toast('La tienda aún no tiene catálogo: entra a la tienda con "Acceso dueño" para crearlo.');return;}
+    const st={};calc().L.forEach(p=>st[p.n]=p.stock);let n=0,cambio=false;
+    const prods=data.data.productos.map(p=>{const k=PN(p.n);if(!(k in st))return p;n++;const stock=Math.max(st[k],0),a=st[k]>0?'1':'0';if(p.stock!==stock||String(p.a)!==a)cambio=true;return{...p,stock,a};});
+    if(!cambio){if(manual)toast('🛍️ La tienda ya estaba al día ('+n+' productos con inventario)');return;}
+    const{error:e2}=await SB.from('tienda_catalogo').upsert({id:1,data:{...data.data,productos:prods},updated_at:new Date().toISOString()});
+    if(manual||e2)toast(e2?'⚠️ No se pudo actualizar la tienda (¿tu cuenta es la de dueño?)':'🛍️ Tienda actualizada: '+n+' productos con inventario');
+  }catch(e){if(manual)toast('📴 No pude conectar con la tienda');}
+}
 async function iniciar(){
   cargarDeLocal();TS=Number(localStorage.getItem(KEY+'_ts'))||0;fillCli();pintarEmp();
   if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
