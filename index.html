@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Palmascent">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;600&display=swap" media=\"print\" onload=\"this.media='all'\">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <title>Palmascent · Control del Negocio</title>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,28 +17,24 @@
 <div class="wrap">
 <header class="mast"><div><h1>Palmascent</h1><p>Ventas, costos e inventario del negocio</p></div><span class="ok" id="syncSt" onclick="estadoClick()" style="cursor:pointer">● Local</span></header>
 
-<div class="box bar">
-  <div><b>Restaurar copia (.json):</b> <input type="file" id="fileInput" accept=".json,application/json" style="width:auto" onchange="cargarJSON()"> <span class="mu">Se importa solo al elegirlo (o arrastra el archivo a la página)</span></div>
-  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <label><b>Periodo:</b></label>
-    <select id="per" style="width:auto" onchange="render()">
+<div class="box bar"><b>Periodo del análisis</b><select id="per" style="width:auto" onchange="render()">
       <option value="todo">Todo el historial</option><option value="mes">Este mes</option><option value="mesant">Mes anterior</option><option value="30d">Últimos 30 días</option><option value="anio">Este año</option>
-    </select>
-    <button class="btn p" onclick="exportarJSON()">💾 Copia de seguridad</button>
-  </div>
-</div>
+    </select></div>
 
 <div class="tabs" id="tabs">
   <div class="brand"><b>🌴 Palmascent</b><small id="uMail">Control del negocio</small></div>
+  <div class="grp">Operación</div>
   <button class="on" data-t="resumen"><i>📊</i>Resumen</button>
-  <button data-t="cotizar"><i>🧾</i>Facturar</button>
-  <button data-t="clientes"><i>👥</i>Clientes</button>
+  <button data-t="cotizar"><i>🧾</i>POS</button>
   <button data-t="inventario"><i>📦</i>Inventario</button>
+  <button data-t="clientes"><i>👥</i>Clientes</button>
   <button class="mbtn" onclick="masMenu()"><i>⋯</i>Más</button>
   <div class="secw">
+    <div class="grp">Finanzas</div>
     <button data-t="finanzas"><i>💰</i>Movimientos</button>
-    <button data-t="ganancias"><i>📈</i>Ganancias</button>
+    <button data-t="ganancias"><i>📈</i>PyG y Precios</button>
     <button data-t="gastos"><i>🧷</i>Gastos</button>
+    <div class="grp">Sistema</div>
     <button data-t="ajustes"><i>⚙️</i>Ajustes</button>
   </div>
 </div>
@@ -70,14 +66,18 @@
       <input type="text" id="concepto" list="prods" placeholder="Producto o gasto">
       <datalist id="prods"></datalist>
       <input type="number" id="monto" placeholder="Monto total ($)">
-      <select id="tipo">
+      <select id="tipo" onchange="formSmart()">
         <option value="ingreso">+ Ingreso (venta cash)</option>
         <option value="egreso">- Egreso (gasto/compra)</option>
         <option value="pendiente">☐ Por cobrar (me deben)</option>
+        <option value="abono">+ Abono de un cliente</option>
+        <option value="obsequio">🎁 Obsequio / muestra / baja (descuenta stock)</option>
+        <option value="transferencia">⇄ Transferencia entre cuentas</option>
       </select>
-      <select id="categoria"></select>
+      <select id="categoria" onchange="formSmart()"></select>
+      <select id="cuenta" class="ctasel" title="Cuenta (origen)"></select><select id="destino" class="ctasel" title="Cuenta destino" style="display:none"></select>
       <input type="number" id="cantidad" placeholder="Cantidad" value="1" min="1">
-      <input id="cliente" list="clist" placeholder="Cliente (si es fiado)"><datalist id="clist"></datalist>
+      <input id="cliente" list="clist" placeholder="Cliente (si es fiado)"><datalist id="clist"></datalist><datalist id="clistD"></datalist>
       <button id="btnAccion" class="btn full" onclick="procesarRegistro()">Agregar registro</button>
       <button id="btnCancelar" class="btn full" style="background:#7f8c8d;display:none" onclick="cancelarEdicion()">Cancelar edición</button>
     </div>
@@ -86,7 +86,7 @@
   <div class="box">
     <div class="form" style="margin-bottom:10px">
       <input type="search" id="q" placeholder="🔎 Buscar..." oninput="render()">
-      <select id="ft" onchange="render()"><option value="">Todos los tipos</option><option value="ingreso">Ingreso</option><option value="egreso">Egreso</option><option value="pendiente">Por cobrar</option><option value="pagado">Pagado</option><option value="abono">Abono</option></select>
+      <select id="ft" onchange="render()"><option value="">Todos los tipos</option><option value="ingreso">Ingreso</option><option value="egreso">Egreso</option><option value="pendiente">Por cobrar</option><option value="pagado">Pagado</option><option value="abono">Abono</option><option value="obsequio">Obsequio</option><option value="porpagar">Por pagar</option><option value="pagoprov">Pago a proveedor</option><option value="devolucion">Devolución</option><option value="transferencia">Transferencia</option></select>
     </div>
     <div class="sc"><table><thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th>Tipo</th><th class="n">Cant.</th><th class="n">Monto</th><th>Acciones</th></tr></thead><tbody id="tablaRegistros"></tbody></table></div>
   </div>
@@ -131,19 +131,29 @@
 
 <!-- INVENTARIO -->
 <div id="inventario" class="tab">
+    <div class="box"><h3>📥 Registrar compra (varios productos a la vez)</h3>
+    <div class="form"><input type="date" id="cbFec"><input id="cbProv" placeholder="Proveedor / nota (opcional)"><input type="number" id="cbDef" placeholder="Costo por defecto por unidad ($)" oninput="cbTot()"><select id="cbPago" title="Cómo se pagó"><option value="Efectivo">Pagada: Efectivo</option><option value="Nequi">Pagada: Nequi</option><option value="Bancolombia">Pagada: Bancolombia</option><option value="Otro">Pagada: Otro</option><option value="credito">A crédito (por pagar)</option></select><select id="cbMod" onchange="cbRender()"><option value="u">Costo por unidad</option><option value="t">Costo total de la línea</option></select></div>
+    <div class="sc" style="margin-top:10px"><table><thead><tr><th>Producto</th><th class="n">Cant.</th><th class="n" id="cbH">Costo/und</th><th class="n">Precio venta</th><th class="n">Subtotal</th><th></th></tr></thead><tbody id="cbRows"></tbody></table></div>
+    <textarea id="cbTxt" rows="5" style="display:none;width:100%;margin-top:10px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--in);color:var(--tx)" placeholder="Pega una línea por producto:&#10;Nombre ; cantidad ; costo ; precio de venta (opcional)&#10;Puedes copiar desde Excel."></textarea>
+    <div class="form" style="margin-top:10px"><button class="btn b" onclick="cbAdd(5)">+ 5 filas</button><button class="btn p" onclick="cbPaste()">📋 Pegar lista</button><button class="btn o" onclick="cbImport()">Cargar lista pegada</button><b id="cbTot" style="align-self:center">0 productos · $0</b><button class="btn full" onclick="cbSave()">💾 Guardar compra</button></div>
+    <details style="margin-top:12px"><summary class="mu" style="cursor:pointer">Compras guardadas por lote</summary><div class="sc" id="cbList"></div></details>
+    <p class="mu">💡 Pulsa Enter para pasar al siguiente campo; al final se crea una fila nueva. Si todos cuestan lo mismo, escribe el "costo por defecto" y deja la columna de costo vacía.</p>
+  </div>
+  <div class="box"><h3>🏭 Cuentas por pagar (proveedores)</h3><div class="bar" style="margin-bottom:8px"><span>Pagar desde la cuenta:</span><select id="cpgCta" class="ctasel" style="width:auto"></select></div><div class="sc" id="cpgList"></div></div>
   <div class="box"><h3>📦 Catálogo y stock</h3>
     <div class="form" style="margin-bottom:10px"><input id="apN" placeholder="Producto nuevo"><input id="apC" list="pcats" placeholder="Categoría (Perfumes, Audio…)"><input type="number" id="apP" placeholder="Precio de venta ($)"><button class="btn" onclick="addProd()">+ Al catálogo</button></div>
     <datalist id="pcats"></datalist>
     <p class="mu">Escribe la categoría y el precio de venta de cada producto directo en la tabla. Ese precio se usa en Cotizar (en gris ves el último precio al que vendiste).</p>
-    <div class="sc"><table><thead><tr><th>Producto</th><th>Categoría</th><th class="n">Entradas</th><th class="n">Salidas</th><th class="n">Stock</th><th class="n">Valor (costo)</th><th>Precio venta</th><th></th></tr></thead><tbody id="tablaInventario"></tbody></table></div></div>
+    <div class="sc"><table><thead><tr><th>Producto</th><th>Categoría</th><th class="n">Entradas</th><th class="n">Salidas</th><th class="n">Stock</th><th class="n">Valor (costo)</th><th>Precio detal</th><th>Mayorista</th><th>Stock mín.</th><th></th></tr></thead><tbody id="tablaInventario"></tbody></table></div></div>
 </div>
 
 <!-- COTIZAR -->
 <div id="cotizar" class="tab">
   <div class="grid2">
-    <div class="box"><h3>🧾 Cotización / Factura</h3>
+    <div class="box"><h3>🧾 Vender / Cotizar</h3>
+      <p class="mu" style="margin:-6px 0 8px">Toca un producto para agregarlo (o búscalo abajo) y cobra con un botón.</p><div id="qChips" style="margin-bottom:10px;max-height:130px;overflow-y:auto"></div>
       <div class="form">
-        <select id="qTipo"><option value="cotizacion">Cotización</option><option value="factura">Factura</option></select><input type="date" id="qFec">
+        <input type="hidden" id="qTipo" value="cotizacion"><input type="date" id="qFec"><select id="qCta" class="ctasel" title="Cuenta que recibe el pago"></select><label style="display:flex;align-items:center;gap:8px;font-size:.9em"><input type="checkbox" id="qMay" onchange="qMayor()" style="width:auto;min-height:0"> Precio mayorista</label>
         <select id="qCl" onchange="qPickCli()"></select><input id="qCli" placeholder="Cliente"><input id="qTel" placeholder="Teléfono">
         <input id="qProd" list="prods" placeholder="Producto" onchange="qSug()"><input type="number" id="qCan" value="1" min="1"><input type="number" id="qPre" placeholder="Precio unidad ($)">
         <button class="btn b full" onclick="qAdd()">+ Agregar producto</button>
@@ -151,7 +161,8 @@
       <div class="sc" id="qItems" style="margin-top:10px"></div>
       <div class="form" style="margin-top:10px"><input type="number" id="qDes" placeholder="Descuento (%)" value="0" oninput="qRender()"><input type="number" id="qIva" placeholder="IVA (%)" value="0" oninput="qRender()"><input id="qNota" class="full" placeholder="Nota (válida 3 días, envío incluido…)"></div>
       <div id="qTot"></div>
-      <div class="form" style="margin-top:10px"><button class="btn" onclick="qSave()">💾 Guardar</button><button class="btn b" onclick="qWA()">📲 WhatsApp</button><button class="btn p" onclick="qPrint()">🖨️ PDF</button><button class="btn r" onclick="qNew()">Nuevo</button></div>
+      <div class="form" style="margin-top:10px"><button class="btn" onclick="qCobrar('ingreso')">💵 Vender de contado</button><button class="btn o" onclick="qCobrar('pendiente')">☐ Vender fiado</button></div>
+      <div class="form" style="margin-top:10px"><button class="btn p" onclick="qCot()">💾 Guardar cotización</button><button class="btn b" onclick="qWA()">📲 WhatsApp</button><button class="btn p" onclick="qPrint()">🖨️ PDF</button><button class="btn r" onclick="qNew()">Nuevo</button></div>
     </div>
     <div class="box"><h3>Documentos guardados</h3><div class="sc" id="qList"></div></div>
   </div>
@@ -159,6 +170,7 @@
 
 <!-- CLIENTES -->
 <div id="clientes" class="tab">
+  <div class="box bar"><b>Cuenta que recibe los abonos</b><select id="carCta" class="ctasel" style="width:auto"></select></div>
   <div class="kpis" id="kCar"></div>
   <div class="box"><h3>👥 Nuevo cliente</h3>
     <div class="form"><input id="clN" placeholder="Nombre"><input id="clD" placeholder="Documento (CC / NIT)"><input id="clT" placeholder="Teléfono"><button class="btn" onclick="addCli()">+ Guardar cliente</button></div></div>
@@ -174,16 +186,17 @@
         <div class="full"><b>Logo:</b> <input type="file" accept="image/*" onchange="setLogo(this)" style="width:auto"> <img id="logoPrev" alt="" style="height:44px;vertical-align:middle;display:none"></div></div></div>
     <div class="box"><h3>☁️ Cuenta y nube</h3><p id="cuenta" class="mu"></p>
       <div class="form"><button class="btn" onclick="nubeSync()">🔄 Sincronizar ahora</button><button class="btn r" onclick="salir()">Cerrar sesión</button></div></div>
+    <div class="box"><h3>🛟 Respaldo y migración de datos</h3><p class="mu">Descarga una copia de todo tu negocio o restaura una anterior. Acepta copias v5 y v6: las antiguas se migran solas sin perder datos. También puedes arrastrar el archivo a cualquier parte de la app.</p><div class="form" style="margin-top:10px"><button class="btn p" onclick="exportarJSON()">💾 Descargar copia (v6)</button><input type="file" id="fileInput" accept=".json,application/json" onchange="cargarJSON()"></div></div>
   </div>
 </div>
 </div>
 <div class="sheet" id="sheet" onclick="masMenu(false)"><div class="sheetp" onclick="event.stopPropagation()">
-  <button onclick="verTab('finanzas')"><i>💰</i>Movimientos</button><button onclick="verTab('ganancias')"><i>📈</i>Ganancias</button>
+  <button onclick="verTab('finanzas')"><i>💰</i>Movimientos</button><button onclick="verTab('ganancias')"><i>📈</i>PyG y Precios</button>
   <button onclick="verTab('gastos')"><i>🧷</i>Gastos</button><button onclick="verTab('ajustes')"><i>⚙️</i>Ajustes</button></div></div>
 <div class="login" id="login"><div class="box lg"><h1>🌴 Palmascent</h1><p class="mu">Inicia sesión para ver tu negocio desde cualquier dispositivo.</p>
   <input id="lgE" type="email" placeholder="Correo" autocomplete="email"><input id="lgP" type="password" placeholder="Contraseña (mínimo 6)" autocomplete="current-password">
   <button class="btn" onclick="auth('in')">Entrar</button><button class="btn p" onclick="auth('up')">Crear cuenta</button>
- <button class="btn" style="background:transparent;color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)" onclick="usarLocal()">Continuar sin cuenta</button><p class="mu" style="text-align:center">Sin cuenta todo funciona, pero los datos quedan solo en este dispositivo. Puedes iniciar sesión luego tocando el estado de guardado (arriba a la derecha).</p><p id="lgM" class="mu"></p></div></div>
+  <button class="btn" style="background:transparent;color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd)" onclick="usarLocal()">Continuar sin cuenta</button><p class="mu" style="text-align:center">Sin cuenta todo funciona, pero los datos quedan solo en este dispositivo. Puedes iniciar sesión luego tocando el estado de guardado (arriba a la derecha).</p><p id="lgM" class="mu"></p></div></div>
 <div class="modal" id="modal"><div class="box" style="max-width:420px;margin:14px"><h3>📥 Importar copia</h3><p id="mTxt"></p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="mMerge">Combinar</button><button class="btn o" id="mRep">Reemplazar todo</button><button class="btn" style="background:#7f8c8d" onclick="document.getElementById('modal').classList.remove('on')">Cancelar</button></div></div></div>
 <div id="toast"></div>
 
